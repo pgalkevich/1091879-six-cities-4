@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Main = (props) => {
-  const {data} = props;
-  const {offersCount, offerNames} = data;
+  const {data: {offersCount, offerNames}} = props;
 
   return (
     <main className="page__main page__main--index">
