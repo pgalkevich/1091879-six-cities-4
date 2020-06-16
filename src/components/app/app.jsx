@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
+const titleHandler = () => {};
+
 const App = (props) => {
   const {data} = props;
 
   return (
-    <Main data={data}/>
+    <Main data={data} onTitleClick={titleHandler}/>
   );
 };
 
