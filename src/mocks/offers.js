@@ -1,8 +1,4 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import Main from "./main";
-
-const offers = [
+export default [
   {
     name: `Beautiful & luxurious apartment at great location`,
     imgSrc: `img/apartment-01.jpg`,
@@ -36,11 +32,3 @@ const offers = [
     type: `Apartment`,
   }
 ];
-
-it(`Should Main render correctly`, () => {
-  const tree = renderer
-    .create(<Main offers={offers} />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
