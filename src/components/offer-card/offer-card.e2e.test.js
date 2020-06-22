@@ -19,9 +19,8 @@ it(``, () => {
   const offerCard = shallow(<OfferCard offer={offer} onCardHover={onCardHover} />);
 
   const card = offerCard.find(`.place-card`);
-  card.simulate(`mouseEnter`, onCardHover);
+  card.simulate(`mouseEnter`, offer);
 
   expect(onCardHover).toHaveBeenCalledTimes(1);
-
-  expect(onCardHover.mock.calls[0][0]).toMatchObject(offer);
+  expect(onCardHover).toBeCalledWith(offer);
 });

@@ -14,14 +14,16 @@ class OffersList extends PureComponent {
   }
 
   handleCardHover(offer) {
-    this.setState({activeOffer: offer});
+    return () => {
+      this.setState({activeOffer: offer});
+    };
   }
 
   render() {
     return (
       <React.Fragment>
         {this.offers.map((offer, i) => (
-          <OfferCard offer={offer} onCardHover={() => this.handleCardHover(offer)} key={offer.type + i} />
+          <OfferCard offer={offer} onCardHover={this.handleCardHover(offer)} key={offer.type + i} />
         ))}
       </React.Fragment>
     );
