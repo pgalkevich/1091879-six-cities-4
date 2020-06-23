@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
 
 const Main = (props) => {
-  const {offers} = props;
+  const {offers, onTitleClick} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -54,7 +54,7 @@ const Main = (props) => {
               <span className="places__sorting-type" tabIndex="0">
                 Popular
                 <svg className="places__sorting-arrow" width="7" height="4">
-                  <use xlinkHref="#icon-arrow-select"></use>
+                  <use xlinkHref="#icon-arrow-select"/>
                 </svg>
               </span>
               <ul className="places__options places__options--custom places__options--opened">
@@ -71,11 +71,11 @@ const Main = (props) => {
               </select> */}
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <OffersList offers={offers} />
+              <OffersList offers={offers} onTitleClick={onTitleClick}/>
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map map"/>
           </div>
         </div>
       </div>
@@ -92,8 +92,17 @@ Main.propTypes = {
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         type: PropTypes.string.isRequired,
+        bedroomsCount: PropTypes.number.isRequired,
+        maxCapacity: PropTypes.number.isRequired,
+        photos: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired,
+        features: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired
       }).isRequired
   ).isRequired,
+  onTitleClick: PropTypes.func.isRequired
 };
 
 export default Main;

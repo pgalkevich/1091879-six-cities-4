@@ -20,10 +20,12 @@ class OffersList extends PureComponent {
   }
 
   render() {
+    const {onTitleClick} = this.props;
+
     return (
       <React.Fragment>
         {this.offers.map((offer, i) => (
-          <OfferCard offer={offer} onCardHover={this.handleCardHover(offer)} key={offer.type + i} />
+          <OfferCard offer={offer} onCardHover={this.handleCardHover(offer)} onTitleClick={() => onTitleClick(this.state.activeOffer)} key={offer.type + i} />
         ))}
       </React.Fragment>
     );
@@ -39,8 +41,17 @@ OffersList.propTypes = {
         price: PropTypes.number.isRequired,
         rating: PropTypes.number.isRequired,
         type: PropTypes.string.isRequired,
+        bedroomsCount: PropTypes.number.isRequired,
+        maxCapacity: PropTypes.number.isRequired,
+        photos: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired,
+        features: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired
       }).isRequired
-  ).isRequired
+  ).isRequired,
+  onTitleClick: PropTypes.func.isRequired
 };
 
 export default OffersList;

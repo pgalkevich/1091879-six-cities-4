@@ -92,6 +92,7 @@ exports[`OfferCard is rendered correctly 1`] = `
       className="place-card__name"
     >
       <a
+        className="place-card__name-link"
         href="#"
       >
         Beautiful & luxurious apartment at great location
