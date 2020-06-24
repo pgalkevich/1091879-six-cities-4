@@ -127,7 +127,7 @@ const offers = [
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
-    .create(<Main offers={offers} />)
+    .create(<Main offers={offers} onTitleClick={() => {}}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

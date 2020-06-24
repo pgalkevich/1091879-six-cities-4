@@ -35,7 +35,7 @@ const offer = {
 
 it(`OfferCard is rendered correctly`, () => {
   const tree = renderer.create(
-      <OfferCard offer={offer} onCardHover={() => {}} />
+      <OfferCard offer={offer} onCardHover={() => {}} onTitleClick={() => {}} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

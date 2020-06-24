@@ -94,6 +94,7 @@ exports[`OfferCard is rendered correctly 1`] = `
       <a
         className="place-card__name-link"
         href="#"
+        onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location
       </a>
