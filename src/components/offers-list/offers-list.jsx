@@ -5,7 +5,8 @@ import OfferCard from "../offer-card/offer-card.jsx";
 class OffersList extends PureComponent {
   constructor(props) {
     super(props);
-    this.handleCardHover = this.handleCardHover.bind(this);
+    this._handleCardHover = this._handleCardHover.bind(this);
+    this._onTitleClick = this._onTitleClick.bind(this);
 
     this.offers = props.offers;
     this.state = {
@@ -13,19 +14,22 @@ class OffersList extends PureComponent {
     };
   }
 
-  handleCardHover(offer) {
+  _handleCardHover(offer) {
     return () => {
       this.setState({activeOffer: offer});
     };
   }
 
-  render() {
+  _onTitleClick() {
     const {onTitleClick} = this.props;
+    onTitleClick(this.state.activeOffer);
+  }
 
+  render() {
     return (
       <React.Fragment>
         {this.offers.map((offer, i) => (
-          <OfferCard offer={offer} onCardHover={this.handleCardHover(offer)} onTitleClick={() => onTitleClick(this.state.activeOffer)} key={offer.type + i} />
+          <OfferCard offer={offer} onCardHover={this._handleCardHover(offer)} onTitleClick={this._onTitleClick} key={offer.type + i} />
         ))}
       </React.Fragment>
     );
