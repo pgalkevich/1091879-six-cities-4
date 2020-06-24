@@ -7,8 +7,19 @@ import Property from "../property/property.jsx";
 class App extends PureComponent {
   constructor(props) {
     super(props);
+    this._onTitleClick = this._onTitleClick.bind(this);
+
     this.state = {
       offerProperty: null
+    };
+  }
+
+  _onTitleClick(offer) {
+    //eslint-disable-next-line
+    console.log(offer);
+    const that = this;
+    return function () {
+      that.setState({offerProperty: offer});
     };
   }
 
@@ -17,7 +28,7 @@ class App extends PureComponent {
     const {offerProperty} = this.state;
     return offerProperty
       ? <Property offer={offerProperty}/>
-      : <Main offers={offers} onTitleClick={(offer) => this.setState({offerProperty: offer})}/>;
+      : <Main offers={offers} onTitleClick={this._onTitleClick()}/>;
   }
 
   render() {
