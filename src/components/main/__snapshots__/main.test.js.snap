@@ -245,7 +245,7 @@ exports[`Should Main render correctly 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "96%",
                       }
                     }
                   />
@@ -260,7 +260,9 @@ exports[`Should Main render correctly 1`] = `
                 className="place-card__name"
               >
                 <a
+                  className="place-card__name-link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Beautiful & luxurious apartment at great location
                 </a>
@@ -341,7 +343,7 @@ exports[`Should Main render correctly 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "88%",
                       }
                     }
                   />
@@ -356,7 +358,9 @@ exports[`Should Main render correctly 1`] = `
                 className="place-card__name"
               >
                 <a
+                  className="place-card__name-link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Wood and stone place
                 </a>
@@ -437,7 +441,7 @@ exports[`Should Main render correctly 1`] = `
                   <span
                     style={
                       Object {
-                        "width": "80%",
+                        "width": "92%",
                       }
                     }
                   />
@@ -452,7 +456,9 @@ exports[`Should Main render correctly 1`] = `
                 className="place-card__name"
               >
                 <a
+                  className="place-card__name-link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Canal View Prinsengracht
                 </a>
@@ -555,7 +561,9 @@ exports[`Should Main render correctly 1`] = `
                 className="place-card__name"
               >
                 <a
+                  className="place-card__name-link"
                   href="#"
+                  onClick={[Function]}
                 >
                   Nice, cozy, warm big bed apartment
                 </a>

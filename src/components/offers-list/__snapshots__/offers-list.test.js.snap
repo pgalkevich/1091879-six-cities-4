@@ -78,7 +78,7 @@ Array [
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "96%",
               }
             }
           />
@@ -93,7 +93,9 @@ Array [
         className="place-card__name"
       >
         <a
+          className="place-card__name-link"
           href="#"
+          onClick={[Function]}
         >
           Beautiful & luxurious apartment at great location
         </a>
@@ -174,7 +176,7 @@ Array [
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "88%",
               }
             }
           />
@@ -189,7 +191,9 @@ Array [
         className="place-card__name"
       >
         <a
+          className="place-card__name-link"
           href="#"
+          onClick={[Function]}
         >
           Wood and stone place
         </a>
@@ -270,7 +274,7 @@ Array [
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "92%",
               }
             }
           />
@@ -285,7 +289,9 @@ Array [
         className="place-card__name"
       >
         <a
+          className="place-card__name-link"
           href="#"
+          onClick={[Function]}
         >
           Canal View Prinsengracht
         </a>
@@ -388,7 +394,9 @@ Array [
         className="place-card__name"
       >
         <a
+          className="place-card__name-link"
           href="#"
+          onClick={[Function]}
         >
           Nice, cozy, warm big bed apartment
         </a>

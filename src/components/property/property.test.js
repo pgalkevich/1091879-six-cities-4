@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OfferCard from "./offer-card.jsx";
+import Property from "./property.jsx";
 
 const offer = {
   name: `Beautiful & luxurious apartment at great location`,
@@ -33,9 +33,9 @@ const offer = {
   ]
 };
 
-it(`OfferCard is rendered correctly`, () => {
+it(`Property page is rendered correctly`, () => {
   const tree = renderer.create(
-      <OfferCard offer={offer} onCardHover={() => {}} onTitleClick={() => {}} />
+      <Property offer={offer} onCardHover={() => {}} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
