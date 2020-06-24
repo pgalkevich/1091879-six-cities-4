@@ -10,25 +10,24 @@ class App extends PureComponent {
     this._onTitleClick = this._onTitleClick.bind(this);
 
     this.state = {
-      offerProperty: null
+      offerProperty: null,
+      page: `main`
     };
   }
 
   _onTitleClick(offer) {
-    //eslint-disable-next-line
-    console.log(offer);
-    const that = this;
-    return function () {
-      that.setState({offerProperty: offer});
-    };
+    this.setState({offerProperty: offer, page: `offer`});
   }
 
   _renderMainScreen() {
     const {offers} = this.props;
-    const {offerProperty} = this.state;
-    return offerProperty
-      ? <Property offer={offerProperty}/>
-      : <Main offers={offers} onTitleClick={this._onTitleClick()}/>;
+    const {offerProperty, page} = this.state;
+
+    if (page === `offer`) {
+      return <Property offer={offerProperty}/>;
+    }
+
+    return <Main offers={offers} onTitleClick={this._onTitleClick}/>;
   }
 
   render() {
