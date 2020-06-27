@@ -75,7 +75,6 @@ Map.propTypes = {
         ).isRequired
       }).isRequired
   ).isRequired,
-  // onTitleClick: PropTypes.func.isRequired
 };
 
 export default Map;
