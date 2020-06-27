@@ -59,6 +59,9 @@ App.propTypes = {
         type: PropTypes.string.isRequired,
         bedroomsCount: PropTypes.number.isRequired,
         maxCapacity: PropTypes.number.isRequired,
+        coords: PropTypes.arrayOf(
+            PropTypes.number
+        ).isRequired,
         photos: PropTypes.arrayOf(
             PropTypes.string.isRequired
         ).isRequired,

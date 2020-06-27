@@ -1,4 +1,8 @@
-export default [
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Map from "./map.jsx";
+
+const offers = [
   {
     name: `Beautiful & luxurious apartment at great location`,
     imgSrc: `img/apartment-01.jpg`,
@@ -124,3 +128,11 @@ export default [
     ]
   }
 ];
+
+it(`Map is rendered correctly`, () => {
+  const tree = renderer.create(
+      <Map offers={offers} />
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
