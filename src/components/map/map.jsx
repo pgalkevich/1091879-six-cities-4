@@ -14,11 +14,13 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
     this._map = null;
+
+    this._mapRef = React.createRef();
   }
 
   componentDidMount() {
     this.city = [52.38333, 4.9];
-    this._map = leaflet.map(`map`, {
+    this._map = leaflet.map(this._mapRef.current, {
       center: this.city,
       zoom: this._zoom,
       zoomControl: false,
@@ -48,7 +50,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <div id="map" style={{width: `100%`, height: `100%`}}/>
+      <div id="map" ref={this._mapRef} style={{width: `100%`, height: `100%`}}/>
     );
   }
 }

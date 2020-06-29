@@ -131,7 +131,12 @@ const offers = [
 
 it(`Map is rendered correctly`, () => {
   const tree = renderer.create(
-      <Map offers={offers} />
+      <Map offers={offers} />,
+      {
+        createNodeMock: () => {
+          return {};
+        }
+      }
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
