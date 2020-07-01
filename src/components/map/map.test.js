@@ -134,7 +134,7 @@ it(`Map is rendered correctly`, () => {
       <Map offers={offers} />,
       {
         createNodeMock: () => {
-          return {};
+          return document.createElement(`div`);
         }
       }
   ).toJSON();

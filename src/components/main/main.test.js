@@ -134,10 +134,10 @@ it(`Should Main render correctly`, () => {
     .create(<Main offers={offers} onTitleClick={() => {}}/>,
         {
           createNodeMock: () => {
-            return {};
+            return document.createElement(`div`);
           }
-        })
-    .toJSON();
+        }
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

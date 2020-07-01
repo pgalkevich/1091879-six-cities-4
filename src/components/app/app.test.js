@@ -134,10 +134,10 @@ it(`Render App`, () => {
     .create(<App offers={offers}/>,
         {
           createNodeMock: () => {
-            return {};
+            return document.createElement(`div`);
           }
-        })
-    .toJSON();
+        }
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
