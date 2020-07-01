@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
+import Map from "../map/map.jsx";
 
 const Main = (props) => {
   const {offers, onTitleClick} = props;
@@ -75,7 +76,9 @@ const Main = (props) => {
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"/>
+            <section className="cities__map map">
+              <Map offers={offers}/>
+            </section>
           </div>
         </div>
       </div>
@@ -94,6 +97,9 @@ Main.propTypes = {
         type: PropTypes.string.isRequired,
         bedroomsCount: PropTypes.number.isRequired,
         maxCapacity: PropTypes.number.isRequired,
+        coords: PropTypes.arrayOf(
+            PropTypes.number
+        ).isRequired,
         photos: PropTypes.arrayOf(
             PropTypes.string
         ).isRequired,
