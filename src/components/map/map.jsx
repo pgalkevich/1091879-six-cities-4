@@ -7,7 +7,7 @@ class Map extends PureComponent {
     super(props);
 
     this.offers = this.props.offers;
-    this.city = null;
+    this.city = this.props.cityCoords;
     this._zoom = 12;
     this._icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -19,7 +19,6 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    this.city = [52.38333, 4.9];
     this._map = leaflet.map(this._mapRef.current, {
       center: this.city,
       zoom: this._zoom,
@@ -56,6 +55,9 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
+  cityCoords: PropTypes.arrayOf(
+      PropTypes.number.isRequired
+  ).isRequired,
   offers: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
