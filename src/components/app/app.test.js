@@ -131,7 +131,12 @@ const offers = [
 
 it(`Render App`, () => {
   const tree = renderer
-    .create(<App offers={offers}/>)
+    .create(<App offers={offers}/>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

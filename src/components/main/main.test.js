@@ -131,7 +131,12 @@ const offers = [
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
-    .create(<Main offers={offers} onTitleClick={() => {}}/>)
+    .create(<Main offers={offers} onTitleClick={() => {}}/>,
+        {
+          createNodeMock: () => {
+            return {};
+          }
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();
