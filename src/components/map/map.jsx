@@ -39,6 +39,18 @@ class Map extends PureComponent {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.cityCoords !== prevProps.cityCoords) {
+      this._map.flyTo(this.props.cityCoords);
+    }
+
+    if (this.props.offers !== prevProps.offers) {
+      this.props.offers.forEach((offer) => {
+        leaflet.marker(offer.coords, this._icon).addTo(this._map);
+      });
+    }
+  }
+
   componentWillUnmount() {
     this.offers = null;
     this.city = null;

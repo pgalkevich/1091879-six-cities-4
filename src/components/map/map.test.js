@@ -131,7 +131,7 @@ const offers = [
 
 it(`Map is rendered correctly`, () => {
   const tree = renderer.create(
-      <Map offers={offers} />,
+      <Map cityCoords={[48.8566, 2.3522]} offers={offers} />,
       {
         createNodeMock: () => {
           return document.createElement(`div`);

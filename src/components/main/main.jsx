@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
+import CitiesList from "../cities-list/cities-list.jsx";
 
 const Main = (props) => {
   const {offers, cities, currentCity, cityCoords, onTitleClick, onCardHover, onMenuItemClick} = props;
@@ -12,18 +13,7 @@ const Main = (props) => {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            {cities.map((city, i) => (
-              <li className="locations__item" key={`city-${i}`}>
-                <a href="#"
-                  className={city === currentCity
-                    ? `locations__item-link tabs__item tabs__item--active`
-                    : `locations__item-link tabs__item`}
-                  onClick={() => onMenuItemClick(city)}
-                >
-                  <span>{city}</span>
-                </a>
-              </li>
-            ))}
+            <CitiesList cities={cities} currentCity={currentCity} onMenuItemClick={onMenuItemClick}/>
           </ul>
         </section>
       </div>

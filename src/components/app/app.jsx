@@ -43,9 +43,6 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderMainScreen()}
           </Route>
-          <Route exact path="/dev-offer">
-            <Property offer={this.props.offers[0]}/>
-          </Route>
         </Switch>
       </BrowserRouter>
     );
