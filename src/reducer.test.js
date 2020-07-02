@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
+import {reducer, ActionType} from "./reducer.js";
 
 const offers = [
   {
@@ -461,17 +461,6 @@ const getCoords = (city) => {
 
 const getCities = () => {
   return offers.map((city) => city.city);
-};
-
-const DEFAULT_CITY = getCities()[0];
-
-const initialState = {
-  currentCity: DEFAULT_CITY,
-  cityCoords: getCoords(DEFAULT_CITY),
-  offers: getOffers(DEFAULT_CITY),
-  currentOffer: null,
-  page: `main`,
-  cities: getCities()
 };
 
 it(`Reducer without additional parameters should return initial state`, () => {
