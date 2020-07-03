@@ -1,4 +1,6 @@
-export default [
+import {reducer, ActionType} from "./reducer.js";
+
+const offers = [
   {
     city: `Paris`,
     cityCoords: [48.8566, 2.3522],
@@ -439,3 +441,172 @@ export default [
     ]
   },
 ];
+
+const filterCity = (city) => {
+  const filteredOffers = offers.filter((it) => it.city === city);
+  if (filteredOffers.length > 0) {
+    return filteredOffers.pop();
+  } else {
+    throw new Error(`Неверный город!`);
+  }
+};
+
+const getOffers = (city) => {
+  return filterCity(city).offers;
+};
+
+const getCoords = (city) => {
+  return filterCity(city).cityCoords;
+};
+
+const getCities = () => {
+  return offers.map((city) => city.city);
+};
+
+it(`Reducer without additional parameters should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  });
+});
+
+it(`Reducer should change the city by a given value`, () => {
+  expect(reducer({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  }, {
+    type: ActionType.CHANGE_CITY,
+    payload: `Cologne`,
+  })).toEqual({
+    currentCity: `Cologne`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  });
+});
+
+it(`Reducer should load offers by current city`, () => {
+  expect(reducer({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  }, {
+    type: ActionType.LOAD_OFFERS,
+    payload: getOffers(`Cologne`),
+  })).toEqual({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Cologne`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  });
+});
+
+it(`Reducer should set current offer`, () => {
+  const offer = {
+    name: `Beautiful & luxurious apartment at great location`,
+    imgSrc: `img/apartment-01.jpg`,
+    premium: true,
+    price: 120,
+    rating: 4.8,
+    type: `Apartment`,
+    bedroomsCount: 3,
+    maxCapacity: 4,
+    coords: [50.9375, 6.9603],
+    photos: [
+      `room.jpg`,
+      `apartment-01.jpg`,
+      `apartment-02.jpg`,
+      `apartment-03.jpg`,
+      `studio-01.jpg`,
+      `apartment-01.jpg`
+    ],
+    features: [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Kitchen`,
+      `Dishwasher`,
+      `Cabel TV`,
+      `Fridge`
+    ]
+  };
+
+  expect(reducer({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  }, {
+    type: ActionType.SET_CURRENT_OFFER,
+    payload: offer,
+  })).toEqual({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: offer,
+    page: `main`,
+    cities: getCities()
+  });
+});
+
+it(`Reducer should set current page`, () => {
+  expect(reducer({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  }, {
+    type: ActionType.SET_CURRENT_PAGE,
+    payload: `offer`,
+  })).toEqual({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `offer`,
+    cities: getCities()
+  });
+});
+
+it(`Reducer should change city coords`, () => {
+  expect(reducer({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Paris`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  }, {
+    type: ActionType.CHANGE_CITY_COORDS,
+    payload: getCoords(`Brussels`),
+  })).toEqual({
+    currentCity: `Paris`,
+    cityCoords: getCoords(`Brussels`),
+    offers: getOffers(`Paris`),
+    currentOffer: null,
+    page: `main`,
+    cities: getCities()
+  });
+});

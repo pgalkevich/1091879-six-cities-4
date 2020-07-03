@@ -3,33 +3,20 @@ import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card.jsx";
 
 class OffersList extends PureComponent {
-  constructor(props) {
-    super(props);
-    this._handleCardHover = this._handleCardHover.bind(this);
-    this._onTitleClick = this._onTitleClick.bind(this);
-
-    this.offers = props.offers;
-    this.state = {
-      activeOffer: null
-    };
-  }
-
   _handleCardHover(offer) {
+    const {onCardHover} = this.props;
     return () => {
-      this.setState({activeOffer: offer});
+      onCardHover(offer);
     };
-  }
-
-  _onTitleClick() {
-    const {onTitleClick} = this.props;
-    onTitleClick(this.state.activeOffer);
   }
 
   render() {
+    const {offers, onTitleClick} = this.props;
+
     return (
       <React.Fragment>
-        {this.offers.map((offer, i) => (
-          <OfferCard offer={offer} onCardHover={this._handleCardHover(offer)} onTitleClick={this._onTitleClick} key={offer.type + i} />
+        {offers.map((offer, i) => (
+          <OfferCard offer={offer} onCardHover={this._handleCardHover(offer)} onTitleClick={onTitleClick} key={offer.type + i} />
         ))}
       </React.Fragment>
     );
@@ -55,7 +42,8 @@ OffersList.propTypes = {
         ).isRequired
       }).isRequired
   ).isRequired,
-  onTitleClick: PropTypes.func.isRequired
+  onTitleClick: PropTypes.func.isRequired,
+  onCardHover: PropTypes.func.isRequired
 };
 
 export default OffersList;
