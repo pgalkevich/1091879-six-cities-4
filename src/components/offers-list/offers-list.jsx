@@ -2,26 +2,17 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card.jsx";
 
-class OffersList extends PureComponent {
-  _handleCardHover(offer) {
-    const {onCardHover} = this.props;
-    return () => {
-      onCardHover(offer);
-    };
-  }
+const OffersList = (props) => {
+  const {offers, onTitleClick, handler} = props;
 
-  render() {
-    const {offers, onTitleClick} = this.props;
-
-    return (
-      <React.Fragment>
-        {offers.map((offer, i) => (
-          <OfferCard offer={offer} onCardHover={this._handleCardHover(offer)} onTitleClick={onTitleClick} key={offer.type + i} />
-        ))}
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      {offers.map((offer, i) => (
+        <OfferCard offer={offer} onCardHover={handler(offer)} onTitleClick={onTitleClick} key={offer.type + i} />
+      ))}
+    </React.Fragment>
+  );
+};
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(
@@ -43,7 +34,7 @@ OffersList.propTypes = {
       }).isRequired
   ).isRequired,
   onTitleClick: PropTypes.func.isRequired,
-  onCardHover: PropTypes.func.isRequired
+  handler: PropTypes.func.isRequired
 };
 
 export default OffersList;
