@@ -2,11 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
-import withMap from "../../hocs/with-map/with-map.js";
 import CitiesList from "../cities-list/cities-list.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
 
-const MapWrapped = withMap(Map);
 const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
 
@@ -55,7 +53,7 @@ const Main = (props) => {
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <MapWrapped offers={offers} cityCoords={cityCoords}/>
+              <Map offers={offers} cityCoords={cityCoords}/>
             </section>
           </div>
         </div>
