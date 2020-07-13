@@ -29,9 +29,9 @@ class Map extends PureComponent {
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-        {
-          attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
-        })
+          {
+            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
+          })
       .addTo(this._map);
 
     this.offers.forEach((offer) => {
@@ -68,28 +68,28 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   cityCoords: PropTypes.arrayOf(
-    PropTypes.number.isRequired,
+      PropTypes.number.isRequired
   ).isRequired,
   offers: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      imgSrc: PropTypes.string.isRequired,
-      premium: PropTypes.bool.isRequired,
-      price: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      bedroomsCount: PropTypes.number.isRequired,
-      maxCapacity: PropTypes.number.isRequired,
-      coords: PropTypes.arrayOf(
-        PropTypes.number,
-      ).isRequired,
-      photos: PropTypes.arrayOf(
-        PropTypes.string,
-      ).isRequired,
-      features: PropTypes.arrayOf(
-        PropTypes.string,
-      ).isRequired,
-    }).isRequired,
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        imgSrc: PropTypes.string.isRequired,
+        premium: PropTypes.bool.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        type: PropTypes.string.isRequired,
+        bedroomsCount: PropTypes.number.isRequired,
+        maxCapacity: PropTypes.number.isRequired,
+        coords: PropTypes.arrayOf(
+            PropTypes.number
+        ).isRequired,
+        photos: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired,
+        features: PropTypes.arrayOf(
+            PropTypes.string
+        ).isRequired,
+      }).isRequired
   ).isRequired,
 };
 
