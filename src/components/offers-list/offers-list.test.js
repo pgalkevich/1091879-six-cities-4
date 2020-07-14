@@ -127,7 +127,7 @@ const offers = [
 
 it(`OffersList is rendered correctly`, () => {
   const tree = renderer.create(
-      <OffersList offers={offers} onTitleClick={() => {}} onCardHover={() => {}} />
+      <OffersList offers={offers} onTitleClick={() => {}} handler={() => () => {}} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

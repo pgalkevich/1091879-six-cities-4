@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+
+const CitiesListWrapped = withActiveItem(CitiesList);
+const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
   const {offers, cities, currentCity, cityCoords, onTitleClick, onCardHover, onMenuItemClick} = props;
@@ -13,7 +17,7 @@ const Main = (props) => {
       <div className="tabs">
         <section className="locations container">
           <ul className="locations__list tabs__list">
-            <CitiesList cities={cities} currentCity={currentCity} onMenuItemClick={onMenuItemClick}/>
+            <CitiesListWrapped cities={cities} currentCity={currentCity} handler={onMenuItemClick}/>
           </ul>
         </section>
       </div>
@@ -44,7 +48,7 @@ const Main = (props) => {
               </select> */}
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <OffersList offers={offers} onTitleClick={onTitleClick} onCardHover={onCardHover}/>
+              <OffersListWrapped offers={offers} onTitleClick={onTitleClick} handler={onCardHover}/>
             </div>
           </section>
           <div className="cities__right-section">

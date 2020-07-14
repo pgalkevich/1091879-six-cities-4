@@ -19,7 +19,7 @@ const offers = [
       `apartment-02.jpg`,
       `apartment-03.jpg`,
       `studio-01.jpg`,
-      `apartment-01.jpg`
+      `apartment-01.jpg`,
     ],
     features: [
       `Wi-Fi`,
@@ -31,8 +31,8 @@ const offers = [
       `Kitchen`,
       `Dishwasher`,
       `Cabel TV`,
-      `Fridge`
-    ]
+      `Fridge`,
+    ],
   },
   {
     name: `Wood and stone place`,
@@ -50,7 +50,7 @@ const offers = [
       `apartment-02.jpg`,
       `apartment-03.jpg`,
       `studio-01.jpg`,
-      `apartment-01.jpg`
+      `apartment-01.jpg`,
     ],
     features: [
       `Wi-Fi`,
@@ -62,8 +62,8 @@ const offers = [
       `Kitchen`,
       `Dishwasher`,
       `Cabel TV`,
-      `Fridge`
-    ]
+      `Fridge`,
+    ],
   },
   {
     name: `Canal View Prinsengracht`,
@@ -81,7 +81,7 @@ const offers = [
       `apartment-02.jpg`,
       `apartment-03.jpg`,
       `studio-01.jpg`,
-      `apartment-01.jpg`
+      `apartment-01.jpg`,
     ],
     features: [
       `Wi-Fi`,
@@ -93,8 +93,8 @@ const offers = [
       `Kitchen`,
       `Dishwasher`,
       `Cabel TV`,
-      `Fridge`
-    ]
+      `Fridge`,
+    ],
   },
   {
     name: `Nice, cozy, warm big bed apartment`,
@@ -112,7 +112,7 @@ const offers = [
       `apartment-02.jpg`,
       `apartment-03.jpg`,
       `studio-01.jpg`,
-      `apartment-01.jpg`
+      `apartment-01.jpg`,
     ],
     features: [
       `Wi-Fi`,
@@ -124,18 +124,18 @@ const offers = [
       `Kitchen`,
       `Dishwasher`,
       `Cabel TV`,
-      `Fridge`
-    ]
-  }
+      `Fridge`,
+    ],
+  },
 ];
 
 it(`Map is rendered correctly`, () => {
   const tree = renderer.create(
-      <Map cityCoords={[48.8566, 2.3522]} offers={offers} />,
+      <Map cityCoords={[48.8566, 2.3522]} offers={offers}/>,
       {
         createNodeMock: () => {
           return document.createElement(`div`);
-        }
+        },
       }
   ).toJSON();
 

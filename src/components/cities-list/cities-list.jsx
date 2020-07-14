@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const CitiesList = (props) => {
-  const {cities, currentCity, onMenuItemClick} = props;
+  const {cities, currentCity, handler} = props;
 
   return (
     <React.Fragment>
@@ -12,7 +12,7 @@ const CitiesList = (props) => {
             className={city === currentCity
               ? `locations__item-link tabs__item tabs__item--active`
               : `locations__item-link tabs__item`}
-            onClick={() => onMenuItemClick(city)}
+            onClick={handler(city)}
           >
             <span>{city}</span>
           </a>
@@ -27,7 +27,7 @@ CitiesList.propTypes = {
       PropTypes.string.isRequired
   ).isRequired,
   currentCity: PropTypes.string.isRequired,
-  onMenuItemClick: PropTypes.func.isRequired,
+  handler: PropTypes.func.isRequired,
 };
 
 export default CitiesList;

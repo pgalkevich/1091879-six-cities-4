@@ -11,7 +11,7 @@ class Map extends PureComponent {
     this._zoom = 12;
     this._icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
+      iconSize: [30, 30],
     });
     this._map = null;
 
@@ -23,14 +23,14 @@ class Map extends PureComponent {
       center: this.city,
       zoom: this._zoom,
       zoomControl: false,
-      marker: true
+      marker: true,
     });
     this._map.setView(this.city, this._zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
           {
-            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
           })
       .addTo(this._map);
 
@@ -88,7 +88,7 @@ Map.propTypes = {
         ).isRequired,
         features: PropTypes.arrayOf(
             PropTypes.string
-        ).isRequired
+        ).isRequired,
       }).isRequired
   ).isRequired,
 };

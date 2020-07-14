@@ -13,7 +13,7 @@ const cities = [
 
 it(`CitiesList is rendered correctly`, () => {
   const tree = renderer.create(
-      <CitiesList cities={cities} currentCity={`Amsterdam`} onMenuItemClick={() => {}} />
+      <CitiesList cities={cities} currentCity={`Amsterdam`} handler={() => {}} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
