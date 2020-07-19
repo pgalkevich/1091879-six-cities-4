@@ -1,4 +1,4 @@
-import {reducer, ActionType} from "./reducer.js";
+import {reducer, ActionType} from "../reducer.js";
 
 const offers = [
   {

@@ -2,10 +2,12 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducers/application/application.js";
+import {getCities, getCityCoords, getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
+import {getAuthStatus} from "../../reducers/user/selectors.js";
+import {getOffers} from "../../reducers/data/selectors.js";
 
 class App extends PureComponent {
   _renderMainScreen() {
@@ -88,12 +90,13 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  currentOffer: state.currentOffer,
-  page: state.page,
-  cities: state.cities,
-  currentCity: state.currentCity,
-  cityCoords: state.cityCoords
+  offers: getOffers(state),
+  currentOffer: getCurrentOffer(state),
+  page: getPage(state),
+  cities: getCities(state),
+  currentCity: getCurrentCity(state),
+  cityCoords: getCityCoords(state),
+  authStatus: getAuthStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -105,7 +108,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onMenuItemClick(city) {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.loadOffers(city));
     dispatch(ActionCreator.changeCityCoords(city));
   }
 });

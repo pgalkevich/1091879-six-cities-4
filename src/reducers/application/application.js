@@ -1,54 +1,40 @@
-import {extend} from "./utils.js";
-import offers from "./mocks/offers";
+import {extend} from "../../utils.js";
 
-const filterCity = (city) => {
-  const filteredOffers = offers.filter((it) => it.city === city);
-  if (filteredOffers.length > 0) {
-    return filteredOffers.pop();
-  } else {
-    throw new Error(`Неверный город!`);
-  }
-};
+// const filterCity = (offers, city) => {
+//   const filteredOffers = offers.filter((it) => it.city === city);
+//   if (filteredOffers.length > 0) {
+//     return filteredOffers[0];
+//   } else {
+//     throw new Error(`Неверный город!`);
+//   }
+// };
+//
+// const getCoords = (offers, city) => {
+//   return filterCity(offers, city).cityCoords;
+// };
 
-const getOffers = (city) => {
-  return filterCity(city).offers;
-};
-
-const getCoords = (city) => {
-  return filterCity(city).cityCoords;
-};
-
-const getCities = () => {
-  return offers.map((city) => city.city);
-};
-
-const DEFAULT_CITY = getCities()[0];
+const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+const DEFAULT_CITY = CITIES[0];
 
 const initialState = {
   currentCity: DEFAULT_CITY,
-  cityCoords: getCoords(DEFAULT_CITY),
-  offers: getOffers(DEFAULT_CITY),
+  cityCoords: [],
   currentOffer: null,
   page: `main`,
-  cities: getCities()
+  cities: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`],
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  LOAD_OFFERS: `LOAD_OFFERS`,
   SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   SET_CURRENT_PAGE: `SET_CURRENT_PAGE`,
-  CHANGE_CITY_COORDS: `CHANGE_CITY_COORDS`
+  CHANGE_CITY_COORDS: `CHANGE_CITY_COORDS`,
 };
 
 const ActionCreator = {
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city,
-  }),
-  loadOffers: (city) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: getOffers(city),
   }),
   setCurrentOffer: (offer) => ({
     type: ActionType.SET_CURRENT_OFFER,
@@ -61,7 +47,7 @@ const ActionCreator = {
   changeCityCoords: (city) => ({
     type: ActionType.CHANGE_CITY_COORDS,
     payload: getCoords(city),
-  })
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -69,11 +55,6 @@ const reducer = (state = initialState, action) => {
     case (ActionType.CHANGE_CITY):
       return extend(state, {
         currentCity: action.payload
-      });
-
-    case (ActionType.LOAD_OFFERS):
-      return extend(state, {
-        offers: action.payload,
       });
 
     case (ActionType.SET_CURRENT_OFFER):
