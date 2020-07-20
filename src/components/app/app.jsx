@@ -5,9 +5,9 @@ import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {ActionCreator} from "../../reducers/application/application.js";
-import {getCities, getCityCoords, getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
+import {getCityCoords, getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
 import {getAuthStatus} from "../../reducers/user/selectors.js";
-import {getOffers} from "../../reducers/data/selectors.js";
+import {getOffers, getCities} from "../../reducers/data/selectors.js";
 
 class App extends PureComponent {
   _renderMainScreen() {
@@ -75,14 +75,20 @@ App.propTypes = {
   onTitleClick: PropTypes.func.isRequired,
   onMenuItemClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
-  currentCity: PropTypes.string.isRequired,
+  currentCity: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number
+    }),
+  }).isRequired,
   page: PropTypes.string.isRequired,
   currentOffer: offerShape,
   offers: PropTypes.arrayOf(
       offerShape
   ).isRequired,
   cityCoords: PropTypes.arrayOf(
-      PropTypes.number.isRequired
+      PropTypes.number
   ).isRequired,
   cities: PropTypes.arrayOf(
       PropTypes.string

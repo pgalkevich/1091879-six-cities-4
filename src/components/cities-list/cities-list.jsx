@@ -9,12 +9,12 @@ const CitiesList = (props) => {
       {cities.map((city, i) => (
         <li className="locations__item" key={`city-${i}`}>
           <a href="#"
-            className={city === currentCity
+            className={city.name === currentCity.name
               ? `locations__item-link tabs__item tabs__item--active`
               : `locations__item-link tabs__item`}
             onClick={handler(city)}
           >
-            <span>{city}</span>
+            <span>{city.name}</span>
           </a>
         </li>
       ))}
@@ -26,7 +26,13 @@ CitiesList.propTypes = {
   cities: PropTypes.arrayOf(
       PropTypes.string.isRequired
   ).isRequired,
-  currentCity: PropTypes.string.isRequired,
+  currentCity: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number
+    }),
+  }).isRequired,
   handler: PropTypes.func.isRequired,
 };
 

@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
+import {getOfferCoords} from "../../utils";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -25,18 +26,21 @@ class Map extends PureComponent {
       zoomControl: false,
       marker: true,
     });
-    this._map.setView(this.city, this._zoom);
 
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-          {
-            attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
-          })
-      .addTo(this._map);
+    if (this.city.length > 0) {
+      this._map.setView(this.city, this._zoom);
 
-    this.offers.forEach((offer) => {
-      leaflet.marker(offer.coords, this._icon).addTo(this._map);
-    });
+      leaflet
+        .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+            {
+              attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
+            })
+        .addTo(this._map);
+
+      this.offers.forEach((offer) => {
+        leaflet.marker(getOfferCoords(offer), this._icon).addTo(this._map);
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -46,7 +50,7 @@ class Map extends PureComponent {
 
     if (this.props.offers !== prevProps.offers) {
       this.props.offers.forEach((offer) => {
-        leaflet.marker(offer.coords, this._icon).addTo(this._map);
+        leaflet.marker(getOfferCoords(offer), this._icon).addTo(this._map);
       });
     }
   }

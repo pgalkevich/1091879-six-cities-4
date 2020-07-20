@@ -1,27 +1,14 @@
 import {extend} from "../../utils.js";
 
-// const filterCity = (offers, city) => {
-//   const filteredOffers = offers.filter((it) => it.city === city);
-//   if (filteredOffers.length > 0) {
-//     return filteredOffers[0];
-//   } else {
-//     throw new Error(`Неверный город!`);
-//   }
-// };
-//
-// const getCoords = (offers, city) => {
-//   return filterCity(offers, city).cityCoords;
-// };
-
-const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
-const DEFAULT_CITY = CITIES[0];
+const getCityCoords = (city) => ([city.location.latitude, city.location.longitude]);
+// const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+// const DEFAULT_CITY = CITIES[0];
 
 const initialState = {
-  currentCity: DEFAULT_CITY,
+  currentCity: {},
   cityCoords: [],
   currentOffer: null,
   page: `main`,
-  cities: [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`],
 };
 
 const ActionType = {
@@ -34,7 +21,7 @@ const ActionType = {
 const ActionCreator = {
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
-    payload: city,
+    payload: city.name,
   }),
   setCurrentOffer: (offer) => ({
     type: ActionType.SET_CURRENT_OFFER,
@@ -46,7 +33,7 @@ const ActionCreator = {
   }),
   changeCityCoords: (city) => ({
     type: ActionType.CHANGE_CITY_COORDS,
-    payload: getCoords(city),
+    payload: getCityCoords(city),
   }),
 };
 

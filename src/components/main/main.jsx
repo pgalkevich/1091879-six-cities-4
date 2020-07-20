@@ -10,7 +10,7 @@ const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
   const {offers, cities, currentCity, cityCoords, onTitleClick, onCardHover, onMenuItemClick} = props;
-  const currentOffers = offers.slice().filter((offer) => offer.city.name === currentCity);
+  const currentOffers = offers.slice().filter((offer) => offer.city.name === currentCity.name);
 
   return (
     <main className="page__main page__main--index">
@@ -26,7 +26,7 @@ const Main = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{currentOffers.length} places to stay in {currentCity}</b>
+            <b className="places__found">{currentOffers.length} places to stay in {currentCity.name}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -91,7 +91,13 @@ Main.propTypes = {
   cityCoords: PropTypes.arrayOf(
       PropTypes.number.isRequired
   ).isRequired,
-  currentCity: PropTypes.string.isRequired,
+  currentCity: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number
+    }),
+  }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onMenuItemClick: PropTypes.func.isRequired

@@ -17,7 +17,3 @@ export const getCurrentOffer = (state) => {
 export const getPage = (state) => {
   return state[NAME_SPACE].page;
 };
-
-export const getCities = (state) => {
-  return state[NAME_SPACE].cities;
-};
