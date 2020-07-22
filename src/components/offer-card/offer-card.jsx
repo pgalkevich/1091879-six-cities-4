@@ -2,18 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const OfferCard = (props) => {
-  const {offer: {title, preview_image, is_premium, price, rating, type}, onCardHover, onTitleClick} = props;
+  const {offer: {title, previewImage, isPremium, price, rating, type}, onCardHover, onTitleClick} = props;
 
   return (
     <article className="cities__place-card place-card" onMouseEnter={onCardHover}>
-      {is_premium && (
+      {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={preview_image} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -57,27 +57,27 @@ OfferCard.propTypes = {
     }),
     description: PropTypes.string,
     goods: PropTypes.arrayOf(
-      PropTypes.string
+        PropTypes.string
     ),
     host: PropTypes.shape({
-      avatar: PropTypes.string,
+      avatarUrl: PropTypes.string,
       id: PropTypes.number,
-      is_pro: PropTypes.bool,
+      isPro: PropTypes.bool,
       name: PropTypes.string
     }),
     id: PropTypes.number,
     images: PropTypes.arrayOf(
-      PropTypes.string
+        PropTypes.string
     ),
-    is_favorite: PropTypes.bool,
-    is_premium: PropTypes.bool,
+    isFavorite: PropTypes.bool,
+    isPremium: PropTypes.bool,
     location: PropTypes.shape({
       latitude: PropTypes.number,
       longitude: PropTypes.number,
       zoom: PropTypes.number
     }),
-    max_adults: PropTypes.number,
-    preview_image: PropTypes.string,
+    maxAdults: PropTypes.number,
+    previewImage: PropTypes.string,
     price: PropTypes.number,
     rating: PropTypes.number,
     title: PropTypes.string,

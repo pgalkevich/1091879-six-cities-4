@@ -543,6 +543,7 @@ Array [
                     alt="Host avatar"
                     className="property__avatar user__avatar"
                     height="74"
+                    src="img/1.jpg"
                     width="74"
                   />
                 </div>

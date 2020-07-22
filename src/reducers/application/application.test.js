@@ -25,9 +25,9 @@ const offers = [
       `Fridge`
     ],
     host: {
-      avatar: `img/1.jpg`,
+      avatarUrl: `img/1.jpg`,
       id: 1,
-      is_pro: false,
+      isPro: false,
       name: `Name`
     },
     id: 1,
@@ -39,15 +39,15 @@ const offers = [
       `studio-01.jpg`,
       `apartment-01.jpg`
     ],
-    is_favorite: false,
-    is_premium: false,
+    isFavorite: false,
+    isPremium: false,
     location: {
       latitude: 48.8566,
       longitude: 2.3522,
       zoom: 10
     },
-    max_adults: 5,
-    preview_image: `img/apartment-01.jpg`,
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
     price: 10,
     rating: 5,
     title: `Beautiful & luxurious apartment at great location`,
@@ -77,9 +77,9 @@ const offers = [
       `Fridge`
     ],
     host: {
-      avatar: `img/1.jpg`,
+      avatarUrl: `img/1.jpg`,
       id: 1,
-      is_pro: false,
+      isPro: false,
       name: `Name`
     },
     id: 1,
@@ -91,15 +91,15 @@ const offers = [
       `studio-01.jpg`,
       `apartment-01.jpg`
     ],
-    is_favorite: false,
-    is_premium: false,
+    isFavorite: false,
+    isPremium: false,
     location: {
       latitude: 48.8566,
       longitude: 2.3522,
       zoom: 10
     },
-    max_adults: 5,
-    preview_image: `img/apartment-01.jpg`,
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
     price: 10,
     rating: 5,
     title: `Beautiful & luxurious apartment at great location`,
@@ -156,7 +156,7 @@ const cities = [
     }
   },
 ];
-const currentCity =  {
+const currentCity = {
   name: `Amsterdam`,
   location: {
     longitude: 10,
@@ -164,7 +164,7 @@ const currentCity =  {
     zoom: 16
   }
 };
-const cityToChange =  {
+const cityToChange = {
   name: `Cologne`,
   location: {
     longitude: 10,
@@ -190,20 +190,20 @@ it(`Reducer without additional parameters should return initial state`, () => {
 
 it(`Reducer should change the city by a given value`, () => {
   expect(reducer({
-    currentCity: currentCity,
-    offers: offers,
+    currentCity,
+    offers,
     currentOffer: null,
     page: `main`,
-    cities: cities
+    cities
   }, {
     type: ActionType.CHANGE_CITY,
     payload: cityToChange,
   })).toEqual({
     currentCity: cityToChange,
-    offers: offers,
+    offers,
     currentOffer: null,
     page: `main`,
-    cities: cities
+    cities
   });
 });
 
@@ -212,39 +212,39 @@ it(`Reducer should set current offer`, () => {
   const offer = offers[0];
 
   expect(reducer({
-    currentCity: currentCity,
-    offers: offers,
+    currentCity,
+    offers,
     currentOffer: null,
     page: `main`,
-    cities: cities
+    cities
   }, {
     type: ActionType.SET_CURRENT_OFFER,
     payload: offer,
   })).toEqual({
-    currentCity: currentCity,
-    offers: offers,
+    currentCity,
+    offers,
     currentOffer: offer,
     page: `main`,
-    cities: cities
+    cities
   });
 });
 
 it(`Reducer should set current page`, () => {
   expect(reducer({
-    currentCity: currentCity,
-    offers: offers,
+    currentCity,
+    offers,
     currentOffer: null,
     page: `main`,
-    cities: cities
+    cities
   }, {
     type: ActionType.SET_CURRENT_PAGE,
     payload: `offer`,
   })).toEqual({
-    currentCity: currentCity,
-    offers: offers,
+    currentCity,
+    offers,
     currentOffer: null,
     page: `offer`,
-    cities: cities
+    cities
   });
 });
 

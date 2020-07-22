@@ -4,16 +4,16 @@ import PropTypes from "prop-types";
 const Property = (props) => {
   const {
     title,
-    is_premium,
+    isPremium,
     price,
     rating,
     type,
     bedrooms,
-    max_adults,
+    maxAdults,
     images,
     goods,
     description,
-    host: {avatar_url, is_pro, name}
+    host: {avatarUrl, isPro, name}
   } = props.offer;
 
   return (
@@ -68,7 +68,7 @@ const Property = (props) => {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {is_premium && (
+                {isPremium && (
                   <div className="property__mark">
                     <span>Premium</span>
                   </div>
@@ -99,7 +99,7 @@ const Property = (props) => {
                     {bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max {max_adults} adults
+                    Max {maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
@@ -119,11 +119,11 @@ const Property = (props) => {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className={is_pro ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
-                      <img className="property__avatar user__avatar" src={avatar_url} width="74" height="74" alt="Host avatar"/>
+                    <div className={isPro ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
+                      <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
-                        {name}
+                      {name}
                     </span>
                   </div>
                   <div className="property__description">
@@ -325,27 +325,27 @@ Property.propTypes = {
     }).isRequired,
     description: PropTypes.string.isRequired,
     goods: PropTypes.arrayOf(
-      PropTypes.string
+        PropTypes.string
     ).isRequired,
     host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
+      avatarUrl: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
-      is_pro: PropTypes.bool.isRequired,
+      isPro: PropTypes.bool.isRequired,
       name: PropTypes.string.isRequired
     }).isRequired,
     id: PropTypes.number.isRequired,
     images: PropTypes.arrayOf(
-      PropTypes.string.isRequired
+        PropTypes.string.isRequired
     ).isRequired,
-    is_favorite: PropTypes.bool.isRequired,
-    is_premium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired
     }).isRequired,
-    max_adults: PropTypes.number.isRequired,
-    preview_image: PropTypes.string.isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,

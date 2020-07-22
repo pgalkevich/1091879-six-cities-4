@@ -1,5 +1,32 @@
 import {extend} from "../../utils.js";
 
+const convertOffers = (offers) => {
+  return offers.map((item) => {
+    return {
+      bedrooms: item.bedrooms,
+      city: item.city,
+      description: item.description,
+      goods: item.goods,
+      host: {
+        avatarUrl: item.host.avatar_url,
+        id: item.host.id,
+        isPro: item.host.is_pro,
+        name: item.host.name
+      },
+      id: item.id,
+      images: item.images,
+      isFavorite: item.is_favorite,
+      isPremium: item.is_premium,
+      location: item.location,
+      maxAdults: item.max_adults,
+      previewImage: item.preview_image,
+      price: item.price,
+      rating: item.rating,
+      title: item.title,
+      type: item.type
+    };
+  });
+};
 
 const initialState = {
   offers: [],
@@ -12,7 +39,7 @@ const ActionType = {
 const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
-    payload: offers
+    payload: convertOffers(offers)
   }),
 };
 

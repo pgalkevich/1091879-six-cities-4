@@ -8,7 +8,6 @@ import {Provider} from "react-redux";
 import reducer from "./reducers/reducer.js";
 import {Operation as DataOperation} from "./reducers/data/data.js";
 import {Operation as UserOperation, ActionCreator as UserActionCreator, AuthorizationStatus} from "./reducers/user/user.js";
-// import {ActionCreator as ApplicationActionCreator} from "./reducers/application/application.js";
 import App from "./components/app/app.jsx";
 
 const api = createApi(() => {
@@ -23,7 +22,7 @@ const store = createStore(
 );
 
 store.dispatch(DataOperation.loadOffers());
-// store.dispatch(UserOperation.checkAuth());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

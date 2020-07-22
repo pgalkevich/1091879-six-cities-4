@@ -53,7 +53,7 @@ const cities = [
   },
 ];
 
-const currentCity =  {
+const currentCity = {
   name: `Amsterdam`,
   location: {
     longitude: 10,

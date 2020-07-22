@@ -30,9 +30,9 @@ const offers = [
       `Fridge`
     ],
     host: {
-      avatar: `img/1.jpg`,
+      avatarUrl: `img/1.jpg`,
       id: 1,
-      is_pro: false,
+      isPro: false,
       name: `Name`
     },
     id: 1,
@@ -44,15 +44,15 @@ const offers = [
       `studio-01.jpg`,
       `apartment-01.jpg`
     ],
-    is_favorite: false,
-    is_premium: false,
+    isFavorite: false,
+    isPremium: false,
     location: {
       latitude: 48.8566,
       longitude: 2.3522,
       zoom: 10
     },
-    max_adults: 5,
-    preview_image: `img/apartment-01.jpg`,
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
     price: 10,
     rating: 5,
     title: `Beautiful & luxurious apartment at great location`,
