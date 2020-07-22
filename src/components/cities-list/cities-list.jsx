@@ -38,7 +38,7 @@ CitiesList.propTypes = {
       latitude: PropTypes.number,
       longitude: PropTypes.number
     }),
-  }).isRequired,
+  }),
   handler: PropTypes.func.isRequired,
 };
 

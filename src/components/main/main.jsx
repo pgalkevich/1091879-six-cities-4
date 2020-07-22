@@ -11,10 +11,8 @@ const OffersListWrapped = withActiveItem(OffersList);
 const Main = (props) => {
   const {offers, cities, currentCity, onTitleClick, onCardHover, onMenuItemClick} = props;
   const currentOffers = offers.length > 0 ? offers.slice().filter((offer) => offer.city ? offer.city.name === currentCity.name : false) : [];
-  console.log(`Main offers: `, offers);
-  console.log(`Main currentOffers: `, currentOffers);
-  console.log(`Main cities: `, cities);
-  console.log(`Main current City: `, currentCity);
+  // console.log(`Main offers: `, offers);
+  // console.log(`Main currentOffers: `, currentOffers);
 
 
   return (
@@ -123,7 +121,7 @@ Main.propTypes = {
       latitude: PropTypes.number,
       longitude: PropTypes.number
     }),
-  }).isRequired,
+  }),
   onTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onMenuItemClick: PropTypes.func.isRequired

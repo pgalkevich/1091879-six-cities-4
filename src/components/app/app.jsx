@@ -97,7 +97,7 @@ App.propTypes = {
       latitude: PropTypes.number,
       longitude: PropTypes.number
     }),
-  }).isRequired,
+  }),
   page: PropTypes.string.isRequired,
   currentOffer: offerShape,
   offers: PropTypes.arrayOf(

@@ -20,7 +20,6 @@ const selectCities = (offers) => {
       });
     }
   }
-  console.log(`uniq cities: `, uniqueCities);
   return uniqueCities;
 };
 

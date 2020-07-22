@@ -78,7 +78,7 @@ Map.propTypes = {
       latitude: PropTypes.number,
       longitude: PropTypes.number
     }),
-  }).isRequired,
+  }),
   offers: PropTypes.arrayOf(
     PropTypes.shape({
       bedrooms: PropTypes.number,
