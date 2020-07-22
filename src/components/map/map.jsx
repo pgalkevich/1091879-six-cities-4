@@ -8,8 +8,8 @@ class Map extends PureComponent {
     super(props);
 
     this.offers = this.props.offers;
-    this.city = this.props.cityCoords;
-    this._zoom = 12;
+    this.city = [this.props.currentCity.location.latitude, this.props.currentCity.location.longitude];
+    this._zoom = this.props.currentCity.location.zoom;
     this._icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30],
@@ -44,8 +44,9 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.cityCoords !== prevProps.cityCoords) {
-      this._map.flyTo(this.props.cityCoords);
+    if (this.props.currentCity !== prevProps.currentCity) {
+      const coords = [this.props.currentCity.location.latitude, this.props.currentCity.location.longitude];
+      this._map.flyTo(coords);
     }
 
     if (this.props.offers !== prevProps.offers) {
@@ -71,29 +72,51 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  cityCoords: PropTypes.arrayOf(
-      PropTypes.number.isRequired
-  ).isRequired,
+  currentCity: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number
+    }),
+  }).isRequired,
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        premium: PropTypes.bool.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        bedroomsCount: PropTypes.number.isRequired,
-        maxCapacity: PropTypes.number.isRequired,
-        coords: PropTypes.arrayOf(
-            PropTypes.number
-        ).isRequired,
-        photos: PropTypes.arrayOf(
-            PropTypes.string
-        ).isRequired,
-        features: PropTypes.arrayOf(
-            PropTypes.string
-        ).isRequired,
-      }).isRequired
+    PropTypes.shape({
+      bedrooms: PropTypes.number,
+      city: PropTypes.shape({
+        name: PropTypes.string,
+        location: PropTypes.shape({
+          latitude: PropTypes.number,
+          longitude: PropTypes.number
+        })
+      }),
+      description: PropTypes.string,
+      goods: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      host: PropTypes.shape({
+        avatar: PropTypes.string,
+        id: PropTypes.number,
+        is_pro: PropTypes.bool,
+        name: PropTypes.string
+      }),
+      id: PropTypes.number,
+      images: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      is_favorite: PropTypes.bool,
+      is_premium: PropTypes.bool,
+      location: PropTypes.shape({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number
+      }),
+      max_adults: PropTypes.number,
+      preview_image: PropTypes.string,
+      price: PropTypes.number,
+      rating: PropTypes.number,
+      title: PropTypes.string,
+      type: PropTypes.string,
+    })
   ).isRequired,
 };
 

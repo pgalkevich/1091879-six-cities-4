@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import {ActionCreator} from "../../reducers/application/application.js";
-import {getCityCoords, getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
+import {getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
 import {getAuthStatus} from "../../reducers/user/selectors.js";
 import {getOffers, getCities} from "../../reducers/data/selectors.js";
 
@@ -17,7 +17,6 @@ class App extends PureComponent {
       page,
       cities,
       currentCity,
-      cityCoords,
       onTitleClick,
       onCardHover,
       onMenuItemClick
@@ -34,7 +33,6 @@ class App extends PureComponent {
       cities={cities}
       currentCity={currentCity}
       onMenuItemClick={onMenuItemClick}
-      cityCoords={cityCoords}
     />;
   }
 
@@ -52,23 +50,41 @@ class App extends PureComponent {
 }
 
 const offerShape = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  imgSrc: PropTypes.string.isRequired,
-  premium: PropTypes.bool.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  bedroomsCount: PropTypes.number.isRequired,
-  maxCapacity: PropTypes.number.isRequired,
-  coords: PropTypes.arrayOf(
-      PropTypes.number
-  ).isRequired,
-  photos: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired,
-  features: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired
+  bedrooms: PropTypes.number,
+  city: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number
+    })
+  }),
+  description: PropTypes.string,
+  goods: PropTypes.arrayOf(
+    PropTypes.string
+  ),
+  host: PropTypes.shape({
+    avatar: PropTypes.string,
+    id: PropTypes.number,
+    is_pro: PropTypes.bool,
+    name: PropTypes.string
+  }),
+  id: PropTypes.number,
+  images: PropTypes.arrayOf(
+    PropTypes.string
+  ),
+  is_favorite: PropTypes.bool,
+  is_premium: PropTypes.bool,
+  location: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number
+  }),
+  max_adults: PropTypes.number,
+  preview_image: PropTypes.string,
+  price: PropTypes.number,
+  rating: PropTypes.number,
+  title: PropTypes.string,
+  type: PropTypes.string,
 });
 
 App.propTypes = {
@@ -87,21 +103,23 @@ App.propTypes = {
   offers: PropTypes.arrayOf(
       offerShape
   ).isRequired,
-  cityCoords: PropTypes.arrayOf(
-      PropTypes.number
-  ).isRequired,
   cities: PropTypes.arrayOf(
-      PropTypes.string
+    PropTypes.shape({
+      name: PropTypes.string,
+      location: PropTypes.shape({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number
+      })
+    })
   )
 };
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
-  currentOffer: getCurrentOffer(state),
-  page: getPage(state),
   cities: getCities(state),
+  page: getPage(state),
+  currentOffer: getCurrentOffer(state),
   currentCity: getCurrentCity(state),
-  cityCoords: getCityCoords(state),
   authStatus: getAuthStatus(state)
 });
 
@@ -114,7 +132,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onMenuItemClick(city) {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.changeCityCoords(city));
   }
 });
 

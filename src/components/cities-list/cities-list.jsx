@@ -24,8 +24,14 @@ const CitiesList = (props) => {
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired,
+    PropTypes.shape({
+      name: PropTypes.string,
+      location: PropTypes.shape({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number
+      })
+    })
+  ),
   currentCity: PropTypes.shape({
     name: PropTypes.string,
     location: PropTypes.shape({

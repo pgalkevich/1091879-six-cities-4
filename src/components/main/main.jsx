@@ -9,8 +9,13 @@ const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
-  const {offers, cities, currentCity, cityCoords, onTitleClick, onCardHover, onMenuItemClick} = props;
-  const currentOffers = offers.slice().filter((offer) => offer.city.name === currentCity.name);
+  const {offers, cities, currentCity, onTitleClick, onCardHover, onMenuItemClick} = props;
+  const currentOffers = offers.length > 0 ? offers.slice().filter((offer) => offer.city ? offer.city.name === currentCity.name : false) : [];
+  console.log(`Main offers: `, offers);
+  console.log(`Main currentOffers: `, currentOffers);
+  console.log(`Main cities: `, cities);
+  console.log(`Main current City: `, currentCity);
+
 
   return (
     <main className="page__main page__main--index">
@@ -49,12 +54,12 @@ const Main = (props) => {
               </select> */}
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <OffersListWrapped offers={offers} onTitleClick={onTitleClick} handler={onCardHover}/>
+              <OffersListWrapped offers={currentOffers} onTitleClick={onTitleClick} handler={onCardHover}/>
             </div>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map offers={currentOffers} cityCoords={cityCoords}/>
+              <Map offers={currentOffers} currentCity={currentCity}/>
             </section>
           </div>
         </div>
@@ -65,32 +70,53 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        premium: PropTypes.bool.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        bedroomsCount: PropTypes.number.isRequired,
-        maxCapacity: PropTypes.number.isRequired,
-        coords: PropTypes.arrayOf(
-            PropTypes.number
-        ).isRequired,
-        photos: PropTypes.arrayOf(
-            PropTypes.string
-        ).isRequired,
-        features: PropTypes.arrayOf(
-            PropTypes.string
-        ).isRequired
-      }).isRequired
+    PropTypes.shape({
+      bedrooms: PropTypes.number,
+      city: PropTypes.shape({
+        name: PropTypes.string,
+        location: PropTypes.shape({
+          latitude: PropTypes.number,
+          longitude: PropTypes.number
+        })
+      }),
+      description: PropTypes.string,
+      goods: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      host: PropTypes.shape({
+        avatar: PropTypes.string,
+        id: PropTypes.number,
+        is_pro: PropTypes.bool,
+        name: PropTypes.string
+      }),
+      id: PropTypes.number,
+      images: PropTypes.arrayOf(
+        PropTypes.string
+      ),
+      is_favorite: PropTypes.bool,
+      is_premium: PropTypes.bool,
+      location: PropTypes.shape({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number,
+        zoom: PropTypes.number
+      }),
+      max_adults: PropTypes.number,
+      preview_image: PropTypes.string,
+      price: PropTypes.number,
+      rating: PropTypes.number,
+      title: PropTypes.string,
+      type: PropTypes.string,
+    })
   ).isRequired,
   cities: PropTypes.arrayOf(
-      PropTypes.string
-  ).isRequired,
-  cityCoords: PropTypes.arrayOf(
-      PropTypes.number.isRequired
-  ).isRequired,
+    PropTypes.shape({
+      name: PropTypes.string,
+      location: PropTypes.shape({
+        latitude: PropTypes.number,
+        longitude: PropTypes.number
+      })
+    })
+  ),
   currentCity: PropTypes.shape({
     name: PropTypes.string,
     location: PropTypes.shape({

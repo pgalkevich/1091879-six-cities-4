@@ -6,10 +6,6 @@ export const getCurrentCity = (state) => {
   return state[NAME_SPACE].currentCity;
 };
 
-export const getCityCoords = (state) => {
-  return state[NAME_SPACE].cityCoords;
-};
-
 export const getCurrentOffer = (state) => {
   return state[NAME_SPACE].currentOffer;
 };

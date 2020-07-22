@@ -1,17 +1,32 @@
-// import {createSelector} from "reselect";
+import {createSelector} from "reselect";
 import NameSpace from "../name-space.js";
 
+const NAME_SPACE = NameSpace.DATA;
+
 export const getOffers = (state) => {
-  return state[NameSpace.DATA].offers;
+  return state[NAME_SPACE].offers;
 };
 
-export const getCities = (state) => {
-  return state[NameSpace.DATA].cities;
+const selectCities = (offers) => {
+  const offersCities = offers.map((item) => item.city);
+  const uniqueCities = [];
+  const map = new Map();
+  for (const item of offersCities) {
+    if (!map.has(item.name)) {
+      map.set(item.name, true);
+      uniqueCities.push({
+        name: item.name,
+        location: item.location
+      });
+    }
+  }
+  console.log(`uniq cities: `, uniqueCities);
+  return uniqueCities;
 };
 
-// export const getFirstCityOffers = createSelector(
-//     getOffers,
-//     (resultOne, resultTwo) => {
-//       return resultOne.filter((it) => resultTwo && it.type === `artist`);
-//     }
-// );
+export const getCities = createSelector(
+    getOffers,
+    (resultOne) => {
+      return selectCities(resultOne);
+    }
+);
