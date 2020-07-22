@@ -20,7 +20,6 @@ const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        console.log(`response: `, response);
         dispatch(ActionCreator.loadOffers(response.data));
       });
   }
@@ -37,4 +36,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, Operation};
+export {reducer, Operation, ActionType};

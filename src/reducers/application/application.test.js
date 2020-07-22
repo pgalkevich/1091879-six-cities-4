@@ -1,8 +1,4 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import {App} from "./app";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import {reducer, ActionType} from "./application.js";
 
 const offers = [
   {
@@ -132,7 +128,7 @@ const cities = [
     location: {
       longitude: 10,
       latitude: 10,
-        zoom: 16
+      zoom: 16
     }
   },
   {
@@ -140,7 +136,7 @@ const cities = [
     location: {
       longitude: 10,
       latitude: 10,
-        zoom: 16
+      zoom: 16
     }
   },
   {
@@ -148,7 +144,7 @@ const cities = [
     location: {
       longitude: 10,
       latitude: 10,
-        zoom: 16
+      zoom: 16
     }
   },
   {
@@ -156,7 +152,7 @@ const cities = [
     location: {
       longitude: 10,
       latitude: 10,
-        zoom: 16
+      zoom: 16
     }
   },
 ];
@@ -168,115 +164,87 @@ const currentCity =  {
     zoom: 16
   }
 };
+const cityToChange =  {
+  name: `Cologne`,
+  location: {
+    longitude: 10,
+    latitude: 10,
+    zoom: 16
+  }
+};
 
-const mockStore = configureStore([]);
-
-it(`Render App`, () => {
-  const store = mockStore({
-    page: `main`,
-  });
-
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            currentCity={currentCity}
-            offers={offers}
-            page={`main`}
-            currentOffer={null}
-            onCardHover={() => {}}
-            onTitleClick={() => {}}
-            onMenuItemClick={() => {}}
-            cities={cities}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return document.createElement(`div`);
-          }
-        }
-    ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it(`Render Current Offer`, () => {
-  const store = mockStore({
-    page: `offer`,
-  });
-
-  const offer = {
-    bedrooms: 5,
-    city: {
-      name: `Paris`,
+it(`Reducer without additional parameters should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    currentCity: {
+      name: `Amsterdam`,
       location: {
-        latitude: 48.8566,
-        longitude: 2.3522
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
       }
     },
-    description: `Some description`,
-    goods: [
-      `Wi-Fi`,
-      `Washing machine`,
-      `Towels`,
-      `Heating`,
-      `Coffee machine`,
-      `Baby seat`,
-      `Kitchen`,
-      `Dishwasher`,
-      `Cabel TV`,
-      `Fridge`
-    ],
-    host: {
-      avatar: `img/1.jpg`,
-      id: 1,
-      is_pro: false,
-      name: `Name`
-    },
-    id: 1,
-    images: [
-      `room.jpg`,
-      `apartment-01.jpg`,
-      `apartment-02.jpg`,
-      `apartment-03.jpg`,
-      `studio-01.jpg`,
-      `apartment-01.jpg`
-    ],
-    is_favorite: false,
-    is_premium: false,
-    location: {
-      latitude: 48.8566,
-      longitude: 2.3522,
-      zoom: 10
-    },
-    max_adults: 5,
-    preview_image: `img/apartment-01.jpg`,
-    price: 10,
-    rating: 5,
-    title: `Beautiful & luxurious apartment at great location`,
-    type: `Apartment`,
-  };
-
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            currentCity={currentCity}
-            offers={offers}
-            page={`offer`}
-            currentOffer={offers[0]}
-            onCardHover={() => {}}
-            onTitleClick={() => {}}
-            onMenuItemClick={() => {}}
-            cities={cities}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return document.createElement(`div`);
-          }
-        }
-    ).toJSON();
-
-  expect(tree).toMatchSnapshot();
+    currentOffer: null,
+    page: `main`,
+  });
 });
+
+it(`Reducer should change the city by a given value`, () => {
+  expect(reducer({
+    currentCity: currentCity,
+    offers: offers,
+    currentOffer: null,
+    page: `main`,
+    cities: cities
+  }, {
+    type: ActionType.CHANGE_CITY,
+    payload: cityToChange,
+  })).toEqual({
+    currentCity: cityToChange,
+    offers: offers,
+    currentOffer: null,
+    page: `main`,
+    cities: cities
+  });
+});
+
+
+it(`Reducer should set current offer`, () => {
+  const offer = offers[0];
+
+  expect(reducer({
+    currentCity: currentCity,
+    offers: offers,
+    currentOffer: null,
+    page: `main`,
+    cities: cities
+  }, {
+    type: ActionType.SET_CURRENT_OFFER,
+    payload: offer,
+  })).toEqual({
+    currentCity: currentCity,
+    offers: offers,
+    currentOffer: offer,
+    page: `main`,
+    cities: cities
+  });
+});
+
+it(`Reducer should set current page`, () => {
+  expect(reducer({
+    currentCity: currentCity,
+    offers: offers,
+    currentOffer: null,
+    page: `main`,
+    cities: cities
+  }, {
+    type: ActionType.SET_CURRENT_PAGE,
+    payload: `offer`,
+  })).toEqual({
+    currentCity: currentCity,
+    offers: offers,
+    currentOffer: null,
+    page: `offer`,
+    cities: cities
+  });
+});
+

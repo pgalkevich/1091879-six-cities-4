@@ -319,7 +319,8 @@ Property.propTypes = {
       name: PropTypes.string.isRequired,
       location: PropTypes.shape({
         latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired
       }).isRequired
     }).isRequired,
     description: PropTypes.string.isRequired,

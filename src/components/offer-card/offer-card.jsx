@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const OfferCard = (props) => {
   const {offer: {title, preview_image, is_premium, price, rating, type}, onCardHover, onTitleClick} = props;
-  // console.log(`offer card props: `, props);
 
   return (
     <article className="cities__place-card place-card" onMouseEnter={onCardHover}>
@@ -52,7 +51,8 @@ OfferCard.propTypes = {
       name: PropTypes.string,
       location: PropTypes.shape({
         latitude: PropTypes.number,
-        longitude: PropTypes.number
+        longitude: PropTypes.number,
+        zoom: PropTypes.number
       })
     }),
     description: PropTypes.string,

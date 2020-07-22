@@ -55,7 +55,8 @@ const offerShape = PropTypes.shape({
     name: PropTypes.string,
     location: PropTypes.shape({
       latitude: PropTypes.number,
-      longitude: PropTypes.number
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
     })
   }),
   description: PropTypes.string,
@@ -95,7 +96,8 @@ App.propTypes = {
     name: PropTypes.string,
     location: PropTypes.shape({
       latitude: PropTypes.number,
-      longitude: PropTypes.number
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
     }),
   }),
   page: PropTypes.string.isRequired,
@@ -108,7 +110,8 @@ App.propTypes = {
       name: PropTypes.string,
       location: PropTypes.shape({
         latitude: PropTypes.number,
-        longitude: PropTypes.number
+        longitude: PropTypes.number,
+        zoom: PropTypes.number,
       })
     })
   )

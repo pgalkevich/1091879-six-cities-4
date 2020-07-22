@@ -28,7 +28,8 @@ CitiesList.propTypes = {
       name: PropTypes.string,
       location: PropTypes.shape({
         latitude: PropTypes.number,
-        longitude: PropTypes.number
+        longitude: PropTypes.number,
+        zoom: PropTypes.number
       })
     })
   ),
@@ -36,7 +37,8 @@ CitiesList.propTypes = {
     name: PropTypes.string,
     location: PropTypes.shape({
       latitude: PropTypes.number,
-      longitude: PropTypes.number
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
     }),
   }),
   handler: PropTypes.func.isRequired,

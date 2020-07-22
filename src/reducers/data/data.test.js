@@ -1,6 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import Map from "./map.jsx";
+import {reducer, ActionType, Operation} from "./data.js";
+import MockAdapter from "axios-mock-adapter";
+import {createApi} from "../../api.js";
+
+const api = createApi(() => {});
 
 const offers = [
   {
@@ -108,6 +110,56 @@ const offers = [
     type: `Apartment`,
   }
 ];
+const cities = [
+  {
+    name: `Amsterdam`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
+  },
+  {
+    name: `Hamburg`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
+  },
+  {
+    name: `Paris`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
+  },
+  {
+    name: `Dusseldorf`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
+  },
+  {
+    name: `Brussels`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
+  },
+  {
+    name: `Cologne`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
+  },
+];
 const currentCity =  {
   name: `Amsterdam`,
   location: {
@@ -116,16 +168,58 @@ const currentCity =  {
     zoom: 16
   }
 };
+const cityToChange =  {
+  name: `Cologne`,
+  location: {
+    longitude: 10,
+    latitude: 10,
+    zoom: 16
+  }
+};
 
-it(`Map is rendered correctly`, () => {
-  const tree = renderer.create(
-      <Map currentCity={currentCity} offers={offers}/>,
-      {
-        createNodeMock: () => {
-          return document.createElement(`div`);
-        },
-      }
-  ).toJSON();
-
-  expect(tree).toMatchSnapshot();
+it(`Reducer without additional parameters should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    offers: [],
+  });
 });
+
+it(`Reducer should update offers by load offers`, () => {
+  expect(reducer({
+    currentCity: currentCity,
+    offers: [],
+    currentOffer: null,
+    page: `main`,
+    cities: []
+  }, {
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  })).toEqual({
+    currentCity: currentCity,
+    offers: offers,
+    currentOffer: null,
+    page: `main`,
+    cities: []
+  });
+});
+
+describe(`Operation work correctly`, () => {
+  it(`Should make a correct API call to /hotels`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const questionLoader = Operation.loadOffers();
+
+    apiMock
+      .onGet(`/hotels`)
+      .reply(200, [{fake: true}]);
+
+    return questionLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_OFFERS,
+          payload: [{fake: true}],
+        });
+      });
+  });
+});
+
