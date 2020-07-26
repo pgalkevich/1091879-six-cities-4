@@ -208,14 +208,14 @@ describe(`Operation work correctly`, () => {
 
     apiMock
       .onGet(`/hotels`)
-      .reply(200, [{fake: true}]);
+      .reply(200, offers);
 
     return questionLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS,
-          payload: [{fake: true}],
+          payload: offers,
         });
       });
   });
