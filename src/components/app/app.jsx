@@ -2,10 +2,12 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-// import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducers/application/application.js";
+import {getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
+import {getAuthStatus} from "../../reducers/user/selectors.js";
+import {getOffers, getCities} from "../../reducers/data/selectors.js";
 
 class App extends PureComponent {
   _renderMainScreen() {
@@ -15,7 +17,6 @@ class App extends PureComponent {
       page,
       cities,
       currentCity,
-      cityCoords,
       onTitleClick,
       onCardHover,
       onMenuItemClick
@@ -32,7 +33,6 @@ class App extends PureComponent {
       cities={cities}
       currentCity={currentCity}
       onMenuItemClick={onMenuItemClick}
-      cityCoords={cityCoords}
     />;
   }
 
@@ -50,50 +50,80 @@ class App extends PureComponent {
 }
 
 const offerShape = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  imgSrc: PropTypes.string.isRequired,
-  premium: PropTypes.bool.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  bedroomsCount: PropTypes.number.isRequired,
-  maxCapacity: PropTypes.number.isRequired,
-  coords: PropTypes.arrayOf(
-      PropTypes.number
-  ).isRequired,
-  photos: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired,
-  features: PropTypes.arrayOf(
-      PropTypes.string.isRequired
-  ).isRequired
+  bedrooms: PropTypes.number,
+  city: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
+    })
+  }),
+  description: PropTypes.string,
+  goods: PropTypes.arrayOf(
+      PropTypes.string
+  ),
+  host: PropTypes.shape({
+    avatarUrl: PropTypes.string,
+    id: PropTypes.number,
+    isPro: PropTypes.bool,
+    name: PropTypes.string
+  }),
+  id: PropTypes.number,
+  images: PropTypes.arrayOf(
+      PropTypes.string
+  ),
+  isFavorite: PropTypes.bool,
+  isPremium: PropTypes.bool,
+  location: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+    zoom: PropTypes.number
+  }),
+  maxAdults: PropTypes.number,
+  previewImage: PropTypes.string,
+  price: PropTypes.number,
+  rating: PropTypes.number,
+  title: PropTypes.string,
+  type: PropTypes.string,
 });
 
 App.propTypes = {
   onTitleClick: PropTypes.func.isRequired,
   onMenuItemClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
-  currentCity: PropTypes.string.isRequired,
+  currentCity: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
+    }),
+  }),
   page: PropTypes.string.isRequired,
   currentOffer: offerShape,
   offers: PropTypes.arrayOf(
       offerShape
   ).isRequired,
-  cityCoords: PropTypes.arrayOf(
-      PropTypes.number.isRequired
-  ).isRequired,
   cities: PropTypes.arrayOf(
-      PropTypes.string
+      PropTypes.shape({
+        name: PropTypes.string,
+        location: PropTypes.shape({
+          latitude: PropTypes.number,
+          longitude: PropTypes.number,
+          zoom: PropTypes.number,
+        })
+      })
   )
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  currentOffer: state.currentOffer,
-  page: state.page,
-  cities: state.cities,
-  currentCity: state.currentCity,
-  cityCoords: state.cityCoords
+  offers: getOffers(state),
+  cities: getCities(state),
+  page: getPage(state),
+  currentOffer: getCurrentOffer(state),
+  currentCity: getCurrentCity(state),
+  authStatus: getAuthStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -105,8 +135,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onMenuItemClick(city) {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.loadOffers(city));
-    dispatch(ActionCreator.changeCityCoords(city));
   }
 });
 

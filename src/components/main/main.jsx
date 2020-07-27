@@ -9,7 +9,8 @@ const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
-  const {offers, cities, currentCity, cityCoords, onTitleClick, onCardHover, onMenuItemClick} = props;
+  const {offers, cities, currentCity, onTitleClick, onCardHover, onMenuItemClick} = props;
+  const currentOffers = offers.length > 0 ? offers.slice().filter((offer) => offer.city ? offer.city.name === currentCity.name : false) : [];
 
   return (
     <main className="page__main page__main--index">
@@ -25,7 +26,7 @@ const Main = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in {currentCity}</b>
+            <b className="places__found">{currentOffers.length} places to stay in {currentCity.name}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -48,12 +49,12 @@ const Main = (props) => {
               </select> */}
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <OffersListWrapped offers={offers} onTitleClick={onTitleClick} handler={onCardHover}/>
+              <OffersListWrapped offers={currentOffers} onTitleClick={onTitleClick} handler={onCardHover}/>
             </div>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map offers={offers} cityCoords={cityCoords}/>
+              <Map offers={currentOffers} currentCity={currentCity}/>
             </section>
           </div>
         </div>
@@ -65,32 +66,62 @@ const Main = (props) => {
 Main.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        imgSrc: PropTypes.string.isRequired,
-        premium: PropTypes.bool.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number.isRequired,
-        type: PropTypes.string.isRequired,
-        bedroomsCount: PropTypes.number.isRequired,
-        maxCapacity: PropTypes.number.isRequired,
-        coords: PropTypes.arrayOf(
-            PropTypes.number
-        ).isRequired,
-        photos: PropTypes.arrayOf(
+        bedrooms: PropTypes.number,
+        city: PropTypes.shape({
+          name: PropTypes.string,
+          location: PropTypes.shape({
+            latitude: PropTypes.number,
+            longitude: PropTypes.number,
+            zoom: PropTypes.number
+          })
+        }),
+        description: PropTypes.string,
+        goods: PropTypes.arrayOf(
             PropTypes.string
-        ).isRequired,
-        features: PropTypes.arrayOf(
+        ),
+        host: PropTypes.shape({
+          avatarUrl: PropTypes.string,
+          id: PropTypes.number,
+          isPro: PropTypes.bool,
+          name: PropTypes.string
+        }),
+        id: PropTypes.number,
+        images: PropTypes.arrayOf(
             PropTypes.string
-        ).isRequired
-      }).isRequired
+        ),
+        isFavorite: PropTypes.bool,
+        isPremium: PropTypes.bool,
+        location: PropTypes.shape({
+          latitude: PropTypes.number,
+          longitude: PropTypes.number,
+          zoom: PropTypes.number
+        }),
+        maxAdults: PropTypes.number,
+        previewImage: PropTypes.string,
+        price: PropTypes.number,
+        rating: PropTypes.number,
+        title: PropTypes.string,
+        type: PropTypes.string,
+      })
   ).isRequired,
   cities: PropTypes.arrayOf(
-      PropTypes.string
-  ).isRequired,
-  cityCoords: PropTypes.arrayOf(
-      PropTypes.number.isRequired
-  ).isRequired,
-  currentCity: PropTypes.string.isRequired,
+      PropTypes.shape({
+        name: PropTypes.string,
+        location: PropTypes.shape({
+          latitude: PropTypes.number,
+          longitude: PropTypes.number,
+          zoom: PropTypes.number
+        })
+      })
+  ),
+  currentCity: PropTypes.shape({
+    name: PropTypes.string,
+    location: PropTypes.shape({
+      latitude: PropTypes.number,
+      longitude: PropTypes.number,
+      zoom: PropTypes.number
+    }),
+  }),
   onTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onMenuItemClick: PropTypes.func.isRequired

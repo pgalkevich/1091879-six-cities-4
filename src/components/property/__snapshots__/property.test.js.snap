@@ -173,13 +173,6 @@ Array [
             className="property__wrapper"
           >
             <div
-              className="property__mark"
-            >
-              <span>
-                Premium
-              </span>
-            </div>
-            <div
               className="property__name-wrapper"
             >
               <h1
@@ -216,7 +209,7 @@ Array [
                 <span
                   style={
                     Object {
-                      "width": "96%",
+                      "width": "100%",
                     }
                   }
                 />
@@ -229,7 +222,7 @@ Array [
               <span
                 className="property__rating-value rating__value"
               >
-                4.8
+                5
               </span>
             </div>
             <ul
@@ -243,14 +236,14 @@ Array [
               <li
                 className="property__feature property__feature--bedrooms"
               >
-                3
+                5
                  Bedrooms
               </li>
               <li
                 className="property__feature property__feature--adults"
               >
                 Max 
-                4
+                5
                  adults
               </li>
             </ul>
@@ -261,7 +254,7 @@ Array [
                 className="property__price-value"
               >
                 €
-                120
+                10
               </b>
               <span
                 className="property__price-text"
@@ -344,20 +337,20 @@ Array [
                 className="property__host-user user"
               >
                 <div
-                  className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper"
+                  className="property__avatar-wrapper user__avatar-wrapper"
                 >
                   <img
                     alt="Host avatar"
                     className="property__avatar user__avatar"
                     height="74"
-                    src="img/avatar-angelina.jpg"
+                    src="img/1.jpg"
                     width="74"
                   />
                 </div>
                 <span
                   className="property__user-name"
                 >
-                  Angelina
+                  Name
                 </span>
               </div>
               <div
@@ -366,12 +359,7 @@ Array [
                 <p
                   className="property__text"
                 >
-                  A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                </p>
-                <p
-                  className="property__text"
-                >
-                  An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                  Some description
                 </p>
               </div>
             </div>

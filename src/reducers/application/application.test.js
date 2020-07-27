@@ -1,8 +1,4 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import {App} from "./app";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import {reducer, ActionType} from "./application.js";
 
 const offers = [
   {
@@ -168,63 +164,87 @@ const currentCity = {
     zoom: 16
   }
 };
+const cityToChange = {
+  name: `Cologne`,
+  location: {
+    longitude: 10,
+    latitude: 10,
+    zoom: 16
+  }
+};
 
-const mockStore = configureStore([]);
-
-it(`Render App`, () => {
-  const store = mockStore({
+it(`Reducer without additional parameters should return initial state`, () => {
+  expect(reducer(void 0, {})).toEqual({
+    currentCity: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 52.37454,
+        longitude: 4.897976,
+        zoom: 13
+      }
+    },
+    currentOffer: null,
     page: `main`,
   });
-
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            currentCity={currentCity}
-            offers={offers}
-            page={`main`}
-            currentOffer={null}
-            onCardHover={() => {}}
-            onTitleClick={() => {}}
-            onMenuItemClick={() => {}}
-            cities={cities}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return document.createElement(`div`);
-          }
-        }
-    ).toJSON();
-
-  expect(tree).toMatchSnapshot();
 });
 
-it(`Render Current Offer`, () => {
-  const store = mockStore({
-    page: `offer`,
+it(`Reducer should change the city by a given value`, () => {
+  expect(reducer({
+    currentCity,
+    offers,
+    currentOffer: null,
+    page: `main`,
+    cities
+  }, {
+    type: ActionType.CHANGE_CITY,
+    payload: cityToChange,
+  })).toEqual({
+    currentCity: cityToChange,
+    offers,
+    currentOffer: null,
+    page: `main`,
+    cities
   });
-
-  const tree = renderer
-    .create(
-        <Provider store={store}>
-          <App
-            currentCity={currentCity}
-            offers={offers}
-            page={`offer`}
-            currentOffer={offers[0]}
-            onCardHover={() => {}}
-            onTitleClick={() => {}}
-            onMenuItemClick={() => {}}
-            cities={cities}
-          />
-        </Provider>,
-        {
-          createNodeMock: () => {
-            return document.createElement(`div`);
-          }
-        }
-    ).toJSON();
-
-  expect(tree).toMatchSnapshot();
 });
+
+
+it(`Reducer should set current offer`, () => {
+  const offer = offers[0];
+
+  expect(reducer({
+    currentCity,
+    offers,
+    currentOffer: null,
+    page: `main`,
+    cities
+  }, {
+    type: ActionType.SET_CURRENT_OFFER,
+    payload: offer,
+  })).toEqual({
+    currentCity,
+    offers,
+    currentOffer: offer,
+    page: `main`,
+    cities
+  });
+});
+
+it(`Reducer should set current page`, () => {
+  expect(reducer({
+    currentCity,
+    offers,
+    currentOffer: null,
+    page: `main`,
+    cities
+  }, {
+    type: ActionType.SET_CURRENT_PAGE,
+    payload: `offer`,
+  })).toEqual({
+    currentCity,
+    offers,
+    currentOffer: null,
+    page: `offer`,
+    cities
+  });
+});
+

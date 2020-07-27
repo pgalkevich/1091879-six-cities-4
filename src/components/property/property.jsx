@@ -2,7 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Property = (props) => {
-  const {name, premium, price, rating, type, bedroomsCount, maxCapacity, photos, features} = props.offer;
+  const {
+    title,
+    isPremium,
+    price,
+    rating,
+    type,
+    bedrooms,
+    maxAdults,
+    images,
+    goods,
+    description,
+    host: {avatarUrl, isPro, name}
+  } = props.offer;
 
   return (
     <React.Fragment>
@@ -47,23 +59,23 @@ const Property = (props) => {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {photos.map((photo, i) => (
-                  <div className="property__image-wrapper" key={photo + i}>
-                    <img className="property__image" src={`img/${photo}`} alt="Photo studio"/>
+                {images.map((image, i) => (
+                  <div className="property__image-wrapper" key={image + i}>
+                    <img className="property__image" src={`img/${image}`} alt="Photo studio"/>
                   </div>
                 ))}
               </div>
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                {premium && (
+                {isPremium && (
                   <div className="property__mark">
                     <span>Premium</span>
                   </div>
                 )}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    {name}
+                    {title}
                   </h1>
                   <button className="property__bookmark-button button" type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
@@ -84,10 +96,10 @@ const Property = (props) => {
                     {type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    {bedroomsCount} Bedrooms
+                    {bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max {maxCapacity} adults
+                    Max {maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
@@ -97,7 +109,7 @@ const Property = (props) => {
                 <div className="property__inside">
                   <h2 className="property__inside-title">What&apos;s inside</h2>
                   <ul className="property__inside-list">
-                    {features.map((item, i) => (
+                    {goods.map((item, i) => (
                       <li className="property__inside-item" key={item + i}>
                         {item}
                       </li>
@@ -107,21 +119,16 @@ const Property = (props) => {
                 <div className="property__host">
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
-                    <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                    <div className={isPro ? `property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper` : `property__avatar-wrapper user__avatar-wrapper`}>
+                      <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
-                        Angelina
+                      {name}
                     </span>
                   </div>
                   <div className="property__description">
                     <p className="property__text">
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                      building is green and from 18th century.
-                    </p>
-                    <p className="property__text">
-                      An independent House, strategically located between Rembrand Square and National Opera, but where the
-                      bustle of the city comes to rest in this alley flowery and colorful.
+                      {description}
                     </p>
                   </div>
                 </div>
@@ -307,21 +314,43 @@ const Property = (props) => {
 
 Property.propTypes = {
   offer: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    imgSrc: PropTypes.string,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedroomsCount: PropTypes.number.isRequired,
-    maxCapacity: PropTypes.number.isRequired,
-    photos: PropTypes.arrayOf(
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired
+      }).isRequired
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.arrayOf(
         PropTypes.string
     ).isRequired,
-    features: PropTypes.arrayOf(
-        PropTypes.string
-    ).isRequired
-  }).isRequired,
+    host: PropTypes.shape({
+      avatarUrl: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      isPro: PropTypes.bool.isRequired,
+      name: PropTypes.string.isRequired
+    }).isRequired,
+    id: PropTypes.number.isRequired,
+    images: PropTypes.arrayOf(
+        PropTypes.string.isRequired
+    ).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired
+    }).isRequired,
+    maxAdults: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  })
 };
 
 export default Property;

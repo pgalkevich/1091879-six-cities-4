@@ -2,40 +2,64 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Property from "./property.jsx";
 
-const offer = {
-  name: `Beautiful & luxurious apartment at great location`,
-  imgSrc: `img/apartment-01.jpg`,
-  premium: true,
-  price: 120,
-  rating: 4.8,
-  type: `Apartment`,
-  bedroomsCount: 3,
-  maxCapacity: 4,
-  photos: [
-    `room.jpg`,
-    `apartment-01.jpg`,
-    `apartment-02.jpg`,
-    `apartment-03.jpg`,
-    `studio-01.jpg`,
-    `apartment-01.jpg`
-  ],
-  features: [
-    `Wi-Fi`,
-    `Washing machine`,
-    `Towels`,
-    `Heating`,
-    `Coffee machine`,
-    `Baby seat`,
-    `Kitchen`,
-    `Dishwasher`,
-    `Cabel TV`,
-    `Fridge`
-  ]
-};
+const offers = [
+  {
+    bedrooms: 5,
+    city: {
+      name: `Paris`,
+      location: {
+        latitude: 48.8566,
+        longitude: 2.3522,
+        zoom: 16
+      }
+    },
+    description: `Some description`,
+    goods: [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Kitchen`,
+      `Dishwasher`,
+      `Cabel TV`,
+      `Fridge`
+    ],
+    host: {
+      avatarUrl: `img/1.jpg`,
+      id: 1,
+      isPro: false,
+      name: `Name`
+    },
+    id: 1,
+    images: [
+      `room.jpg`,
+      `apartment-01.jpg`,
+      `apartment-02.jpg`,
+      `apartment-03.jpg`,
+      `studio-01.jpg`,
+      `apartment-01.jpg`
+    ],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.8566,
+      longitude: 2.3522,
+      zoom: 10
+    },
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
+    price: 10,
+    rating: 5,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+  }
+];
 
 it(`Property page is rendered correctly`, () => {
   const tree = renderer.create(
-      <Property offer={offer} onCardHover={() => {}} />
+      <Property offer={offers[0]} onCardHover={() => {}} />
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

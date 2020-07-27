@@ -4,458 +4,180 @@ import Main from "./main";
 
 const offers = [
   {
-    city: `Paris`,
-    cityCoords: [48.8566, 2.3522],
-    offers: [
-      {
-        name: `Beautiful & luxurious apartment at great location`,
-        imgSrc: `img/apartment-01.jpg`,
-        premium: true,
-        price: 120,
-        rating: 4.8,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [48.8566, 2.3522],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
+    bedrooms: 5,
+    city: {
+      name: `Paris`,
+      location: {
+        latitude: 48.8566,
+        longitude: 2.3522,
+        zoom: 16
       }
-    ]
+    },
+    description: `Some description`,
+    goods: [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Kitchen`,
+      `Dishwasher`,
+      `Cabel TV`,
+      `Fridge`
+    ],
+    host: {
+      avatarUrl: `img/1.jpg`,
+      id: 1,
+      isPro: false,
+      name: `Name`
+    },
+    id: 1,
+    images: [
+      `room.jpg`,
+      `apartment-01.jpg`,
+      `apartment-02.jpg`,
+      `apartment-03.jpg`,
+      `studio-01.jpg`,
+      `apartment-01.jpg`
+    ],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.8566,
+      longitude: 2.3522,
+      zoom: 10
+    },
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
+    price: 10,
+    rating: 5,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
   },
   {
-    city: `Cologne`,
-    cityCoords: [50.9375, 6.9603],
-    offers: [
-      {
-        name: `Beautiful & luxurious apartment at great location`,
-        imgSrc: `img/apartment-01.jpg`,
-        premium: true,
-        price: 120,
-        rating: 4.8,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [50.9375, 6.9603],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      },
-      {
-        name: `Wood and stone place`,
-        imgSrc: `img/room.jpg`,
-        premium: false,
-        price: 80,
-        rating: 4.4,
-        type: `Private room`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.369553943508, 4.85309666406198],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
+    bedrooms: 5,
+    city: {
+      name: `Cologne`,
+      location: {
+        latitude: 50.9375,
+        longitude: 6.9603,
+        zoom: 16
       }
-    ]
+    },
+    description: `Some description`,
+    goods: [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Kitchen`,
+      `Dishwasher`,
+      `Cabel TV`,
+      `Fridge`
+    ],
+    host: {
+      avatarUrl: `img/1.jpg`,
+      id: 1,
+      isPro: false,
+      name: `Name`
+    },
+    id: 1,
+    images: [
+      `room.jpg`,
+      `apartment-01.jpg`,
+      `apartment-02.jpg`,
+      `apartment-03.jpg`,
+      `studio-01.jpg`,
+      `apartment-01.jpg`
+    ],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.8566,
+      longitude: 2.3522,
+      zoom: 10
+    },
+    maxAdults: 5,
+    previewImage: `img/apartment-01.jpg`,
+    price: 10,
+    rating: 5,
+    title: `Beautiful & luxurious apartment at great location`,
+    type: `Apartment`,
+  }
+];
+const cities = [
+  {
+    name: `Amsterdam`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
   },
   {
-    city: `Brussels`,
-    cityCoords: [50.8503, 4.3517],
-    offers: [
-      {
-        name: `Beautiful & luxurious apartment at great location`,
-        imgSrc: `img/apartment-01.jpg`,
-        premium: true,
-        price: 120,
-        rating: 4.8,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [50.8503, 4.3517],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      },
-      {
-        name: `Wood and stone place`,
-        imgSrc: `img/room.jpg`,
-        premium: false,
-        price: 80,
-        rating: 4.4,
-        type: `Private room`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.369553943508, 4.85309666406198],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      },
-      {
-        name: `Canal View Prinsengracht`,
-        imgSrc: `img/apartment-02.jpg`,
-        premium: false,
-        price: 132,
-        rating: 4.6,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.3909553943508, 4.929309666406198],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      }
-    ]
+    name: `Hamburg`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
   },
   {
-    city: `Amsterdam`,
-    cityCoords: [52.38333, 4.9],
-    offers: [
-      {
-        name: `Beautiful & luxurious apartment at great location`,
-        imgSrc: `img/apartment-01.jpg`,
-        premium: true,
-        price: 120,
-        rating: 4.8,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.38333, 4.9],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      },
-      {
-        name: `Wood and stone place`,
-        imgSrc: `img/room.jpg`,
-        premium: false,
-        price: 80,
-        rating: 4.4,
-        type: `Private room`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.369553943508, 4.85309666406198],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      },
-      {
-        name: `Canal View Prinsengracht`,
-        imgSrc: `img/apartment-02.jpg`,
-        premium: false,
-        price: 132,
-        rating: 4.6,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.3909553943508, 4.929309666406198],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      },
-      {
-        name: `Nice, cozy, warm big bed apartment`,
-        imgSrc: `img/apartment-03.jpg`,
-        premium: true,
-        price: 180,
-        rating: 5,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.3809553943508, 4.939309666406198],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      }
-    ]
+    name: `Paris`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
   },
   {
-    city: `Hamburg`,
-    cityCoords: [53.5511, 9.9937],
-    offers: [
-      {
-        name: `Beautiful & luxurious apartment at great location`,
-        imgSrc: `img/apartment-01.jpg`,
-        premium: true,
-        price: 120,
-        rating: 4.8,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [52.3909553943508, 4.85309666406198],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      },
-      {
-        name: `Wood and stone place`,
-        imgSrc: `img/room.jpg`,
-        premium: false,
-        price: 80,
-        rating: 4.4,
-        type: `Private room`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [53.5511, 9.9937],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      }
-    ]
+    name: `Dusseldorf`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
   },
   {
-    city: `Dusseldorf`,
-    cityCoords: [51.2277, 6.7735],
-    offers: [
-      {
-        name: `Beautiful & luxurious apartment at great location`,
-        imgSrc: `img/apartment-01.jpg`,
-        premium: true,
-        price: 120,
-        rating: 4.8,
-        type: `Apartment`,
-        bedroomsCount: 3,
-        maxCapacity: 4,
-        coords: [51.2277, 6.7735],
-        photos: [
-          `room.jpg`,
-          `apartment-01.jpg`,
-          `apartment-02.jpg`,
-          `apartment-03.jpg`,
-          `studio-01.jpg`,
-          `apartment-01.jpg`
-        ],
-        features: [
-          `Wi-Fi`,
-          `Washing machine`,
-          `Towels`,
-          `Heating`,
-          `Coffee machine`,
-          `Baby seat`,
-          `Kitchen`,
-          `Dishwasher`,
-          `Cabel TV`,
-          `Fridge`
-        ]
-      }
-    ]
+    name: `Brussels`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
+  },
+  {
+    name: `Cologne`,
+    location: {
+      longitude: 10,
+      latitude: 10,
+      zoom: 16
+    }
   },
 ];
+const currentCity = {
+  name: `Amsterdam`,
+  location: {
+    longitude: 10,
+    latitude: 10,
+    zoom: 16
+  }
+};
 
 
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(
         <Main
-          currentCity={`Paris`}
-          offers={offers[0].offers}
-          cityCoords={[48.8566, 2.3522]}
+          currentCity={currentCity}
+          offers={offers}
           onCardHover={() => {}}
           onTitleClick={() => {}}
           onMenuItemClick={() => {}}
-          cities={offers.map((city) => city.city)}
+          cities={cities}
         />,
         {
           createNodeMock: () => {
