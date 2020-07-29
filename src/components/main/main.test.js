@@ -445,6 +445,7 @@ const offers = [
 ];
 
 
+
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(
