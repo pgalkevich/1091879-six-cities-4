@@ -168,6 +168,7 @@ const currentCity = {
 };
 
 
+
 it(`Should Main render correctly`, () => {
   const tree = renderer
     .create(
