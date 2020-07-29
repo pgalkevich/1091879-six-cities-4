@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {NavLink} from "react-router-dom";
 
 const OfferCard = (props) => {
-  const {offer: {title, previewImage, isPremium, price, rating, type}, onCardHover, onTitleClick} = props;
+  const {offer: {title, previewImage, isPremium, price, rating, type}, onCardHover} = props;
 
   return (
     <article className="cities__place-card place-card" onMouseEnter={onCardHover}>
@@ -36,7 +37,7 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#" onClick={onTitleClick} className={`place-card__name-link`}>{title}</a>
+          <NavLink to={`/offer`} className={`place-card__name-link`}>{title}</NavLink>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -84,7 +85,6 @@ OfferCard.propTypes = {
     type: PropTypes.string,
   }),
   onCardHover: PropTypes.func.isRequired,
-  onTitleClick: PropTypes.func.isRequired
 };
 
 export default OfferCard;

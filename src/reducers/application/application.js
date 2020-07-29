@@ -10,13 +10,11 @@ const initialState = {
     }
   },
   currentOffer: null,
-  page: `main`,
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
-  SET_CURRENT_PAGE: `SET_CURRENT_PAGE`,
 };
 
 const ActionCreator = {
@@ -27,11 +25,7 @@ const ActionCreator = {
   setCurrentOffer: (offer) => ({
     type: ActionType.SET_CURRENT_OFFER,
     payload: offer,
-  }),
-  setCurrentPage: (page) => ({
-    type: ActionType.SET_CURRENT_PAGE,
-    payload: page,
-  }),
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -44,11 +38,6 @@ const reducer = (state = initialState, action) => {
     case (ActionType.SET_CURRENT_OFFER):
       return extend(state, {
         currentOffer: action.payload,
-      });
-
-    case (ActionType.SET_CURRENT_PAGE):
-      return extend(state, {
-        page: action.payload,
       });
   }
 

@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {getCurrentOffer} from "../../reducers/application/selectors";
+import {connect} from "react-redux";
 
 const Property = (props) => {
+  console.log(`props: `, props);
   const {
     title,
     isPremium,
@@ -353,4 +356,8 @@ Property.propTypes = {
   })
 };
 
-export default Property;
+const mapStateToProps = (state) => ({
+  offer: getCurrentOffer(state),
+});
+
+export default connect(mapStateToProps)(Property);

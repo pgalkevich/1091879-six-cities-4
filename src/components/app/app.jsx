@@ -1,95 +1,50 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
+import Login from "../login/login.jsx";
 import {ActionCreator} from "../../reducers/application/application.js";
 import {getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
 import {getAuthStatus} from "../../reducers/user/selectors.js";
 import {getOffers, getCities} from "../../reducers/data/selectors.js";
+import history from "../../history";
 
 class App extends PureComponent {
-  _renderMainScreen() {
+  render() {
     const {
       offers,
-      currentOffer,
-      page,
       cities,
       currentCity,
-      onTitleClick,
       onCardHover,
       onMenuItemClick
     } = this.props;
-
-    if (page === `offer`) {
-      return <Property offer={currentOffer}/>;
-    }
-
-    return <Main
-      offers={offers}
-      onTitleClick={onTitleClick}
-      onCardHover={onCardHover}
-      cities={cities}
-      currentCity={currentCity}
-      onMenuItemClick={onMenuItemClick}
-    />;
-  }
-
-  render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           <Route exact path="/">
-            {this._renderMainScreen()}
+            <Main
+              offers={offers}
+              onCardHover={onCardHover}
+              cities={cities}
+              currentCity={currentCity}
+              onMenuItemClick={onMenuItemClick}
+            />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/offer">
+            <Property />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
 
-const offerShape = PropTypes.shape({
-  bedrooms: PropTypes.number,
-  city: PropTypes.shape({
-    name: PropTypes.string,
-    location: PropTypes.shape({
-      latitude: PropTypes.number,
-      longitude: PropTypes.number,
-      zoom: PropTypes.number
-    })
-  }),
-  description: PropTypes.string,
-  goods: PropTypes.arrayOf(
-      PropTypes.string
-  ),
-  host: PropTypes.shape({
-    avatarUrl: PropTypes.string,
-    id: PropTypes.number,
-    isPro: PropTypes.bool,
-    name: PropTypes.string
-  }),
-  id: PropTypes.number,
-  images: PropTypes.arrayOf(
-      PropTypes.string
-  ),
-  isFavorite: PropTypes.bool,
-  isPremium: PropTypes.bool,
-  location: PropTypes.shape({
-    latitude: PropTypes.number,
-    longitude: PropTypes.number,
-    zoom: PropTypes.number
-  }),
-  maxAdults: PropTypes.number,
-  previewImage: PropTypes.string,
-  price: PropTypes.number,
-  rating: PropTypes.number,
-  title: PropTypes.string,
-  type: PropTypes.string,
-});
-
 App.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
   onMenuItemClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   currentCity: PropTypes.shape({
@@ -100,10 +55,45 @@ App.propTypes = {
       zoom: PropTypes.number
     }),
   }),
-  page: PropTypes.string.isRequired,
-  currentOffer: offerShape,
   offers: PropTypes.arrayOf(
-      offerShape
+      PropTypes.shape({
+        bedrooms: PropTypes.number,
+        city: PropTypes.shape({
+          name: PropTypes.string,
+          location: PropTypes.shape({
+            latitude: PropTypes.number,
+            longitude: PropTypes.number,
+            zoom: PropTypes.number
+          })
+        }),
+        description: PropTypes.string,
+        goods: PropTypes.arrayOf(
+            PropTypes.string
+        ),
+        host: PropTypes.shape({
+          avatarUrl: PropTypes.string,
+          id: PropTypes.number,
+          isPro: PropTypes.bool,
+          name: PropTypes.string
+        }),
+        id: PropTypes.number,
+        images: PropTypes.arrayOf(
+            PropTypes.string
+        ),
+        isFavorite: PropTypes.bool,
+        isPremium: PropTypes.bool,
+        location: PropTypes.shape({
+          latitude: PropTypes.number,
+          longitude: PropTypes.number,
+          zoom: PropTypes.number
+        }),
+        maxAdults: PropTypes.number,
+        previewImage: PropTypes.string,
+        price: PropTypes.number,
+        rating: PropTypes.number,
+        title: PropTypes.string,
+        type: PropTypes.string,
+      })
   ).isRequired,
   cities: PropTypes.arrayOf(
       PropTypes.shape({
@@ -120,16 +110,12 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
   cities: getCities(state),
-  page: getPage(state),
   currentOffer: getCurrentOffer(state),
   currentCity: getCurrentCity(state),
   authStatus: getAuthStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onTitleClick() {
-    dispatch(ActionCreator.setCurrentPage(`offer`));
-  },
   onCardHover(offer) {
     dispatch(ActionCreator.setCurrentOffer(offer));
   },

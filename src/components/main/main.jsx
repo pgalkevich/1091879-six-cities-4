@@ -9,7 +9,7 @@ const CitiesListWrapped = withActiveItem(CitiesList);
 const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
-  const {offers, cities, currentCity, onTitleClick, onCardHover, onMenuItemClick} = props;
+  const {offers, cities, currentCity, onCardHover, onMenuItemClick} = props;
   const currentOffers = offers.length > 0 ? offers.slice().filter((offer) => offer.city ? offer.city.name === currentCity.name : false) : [];
 
   return (
@@ -49,7 +49,7 @@ const Main = (props) => {
               </select> */}
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <OffersListWrapped offers={currentOffers} onTitleClick={onTitleClick} handler={onCardHover}/>
+              <OffersListWrapped offers={currentOffers} handler={onCardHover}/>
             </div>
           </section>
           <div className="cities__right-section">
@@ -122,7 +122,6 @@ Main.propTypes = {
       zoom: PropTypes.number
     }),
   }),
-  onTitleClick: PropTypes.func.isRequired,
   onCardHover: PropTypes.func.isRequired,
   onMenuItemClick: PropTypes.func.isRequired
 };
