@@ -6,7 +6,7 @@ import Main from "../main/main.jsx";
 import Property from "../property/property.jsx";
 import Login from "../login/login.jsx";
 import {ActionCreator} from "../../reducers/application/application.js";
-import {getCurrentCity, getCurrentOffer, getPage} from "../../reducers/application/selectors.js";
+import {getCurrentCity, getCurrentOffer} from "../../reducers/application/selectors.js";
 import {getAuthStatus} from "../../reducers/user/selectors.js";
 import {getOffers, getCities} from "../../reducers/data/selectors.js";
 import history from "../../history";
@@ -17,7 +17,7 @@ class App extends PureComponent {
       offers,
       cities,
       currentCity,
-      onCardHover,
+      authStatus,
       onMenuItemClick
     } = this.props;
     return (
@@ -26,7 +26,7 @@ class App extends PureComponent {
           <Route exact path="/">
             <Main
               offers={offers}
-              onCardHover={onCardHover}
+              authStatus={authStatus}
               cities={cities}
               currentCity={currentCity}
               onMenuItemClick={onMenuItemClick}
@@ -35,9 +35,10 @@ class App extends PureComponent {
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/offer">
-            <Property />
-          </Route>
+          <Route exact path="/offer/:id" render={ () => <Property authStatus={authStatus} offer={offers[0]}/> } />
+          {/* <Route exact path="/offer/:id">*/}
+          {/*  <Property authStatus={authStatus} offer={offers[0]}/>*/}
+          {/* </Route>*/}
         </Switch>
       </Router>
     );
@@ -45,8 +46,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  authStatus: PropTypes.string.isRequired,
   onMenuItemClick: PropTypes.func.isRequired,
-  onCardHover: PropTypes.func.isRequired,
   currentCity: PropTypes.shape({
     name: PropTypes.string,
     location: PropTypes.shape({

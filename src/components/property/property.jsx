@@ -2,39 +2,29 @@ import React from "react";
 import PropTypes from "prop-types";
 import {getCurrentOffer} from "../../reducers/application/selectors";
 import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../reducers/user/user";
+import {Link} from "react-router-dom";
 
 const Property = (props) => {
   console.log(`props: `, props);
+  // const offerId = props.match.params.id;
   const {
-    title,
-    isPremium,
-    price,
-    rating,
-    type,
-    bedrooms,
-    maxAdults,
-    images,
-    goods,
-    description,
-    host: {avatarUrl, isPro, name}
+    title = ``,
+    isPremium = ``,
+    price = ``,
+    rating = ``,
+    type = ``,
+    bedrooms = ``,
+    maxAdults = ``,
+    images = ``,
+    goods = [],
+    description = ``,
+    host: {avatarUrl = ``, isPro = ``, name = ``}
   } = props.offer;
+  const {authStatus} = props;
 
   return (
     <React.Fragment>
-      <div style={{display: `none`}}>
-        <svg xmlns="http://www.w3.org/2000/svg">
-          <symbol id="icon-arrow-select" viewBox="0 0 7 4">
-            <path fillRule="evenodd" clipRule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z"/>
-          </symbol>
-          <symbol id="icon-bookmark" viewBox="0 0 17 18">
-            <path
-              d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z"/>
-          </symbol>
-          <symbol id="icon-star" viewBox="0 0 13 12">
-            <path fillRule="evenodd" clipRule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z"/>
-          </symbol>
-        </svg>
-      </div>
       <div className="page">
         <header className="header">
           <div className="container">
@@ -47,11 +37,10 @@ const Property = (props) => {
               <nav className="header__nav">
                 <ul className="header__nav-list">
                   <li className="header__nav-item user">
-                    <a className="header__nav-link header__nav-link--profile" href="#">
-                      <div className="header__avatar-wrapper user__avatar-wrapper">
-                      </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    </a>
+                    <Link to={authStatus === AuthorizationStatus.AUTH ? `/favorites` : `/login`} className="header__nav-link header__nav-link--profile">
+                      <div className="header__avatar-wrapper user__avatar-wrapper"/>
+                      <span className="header__user-name user__name">{authStatus === AuthorizationStatus.AUTH ? `Oliver.conner@gmail.com` : `Sign in`}</span>
+                    </Link>
                   </li>
                 </ul>
               </nav>
@@ -316,6 +305,8 @@ const Property = (props) => {
 };
 
 Property.propTypes = {
+  // offerId: PropTypes.number.isRequired,
+  authStatus: PropTypes.string.isRequired,
   offer: PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.shape({

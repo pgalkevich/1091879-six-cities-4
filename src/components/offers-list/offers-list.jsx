@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card.jsx";
 
 const OffersList = (props) => {
-  const {offers, handler} = props;
+  const {offers} = props;
 
   return (
     <React.Fragment>
       {offers.length > 0 && offers.map((offer) => (
-        <OfferCard offer={offer} onCardHover={handler(offer)} key={offer.id} />
+        <OfferCard offer={offer} key={offer.id} />
       ))}
     </React.Fragment>
   );
@@ -55,7 +55,6 @@ OffersList.propTypes = {
         type: PropTypes.string,
       })
   ).isRequired,
-  handler: PropTypes.func.isRequired
 };
 
 export default OffersList;
